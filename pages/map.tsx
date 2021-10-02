@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Course from '../components/course_grid'
 import TopBar from '../components/topbar'
 
-const Home: NextPage = () => {
+const Map: NextPage = () => {
   return (
     <>
     <TopBar/>
@@ -11,4 +11,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default Map
