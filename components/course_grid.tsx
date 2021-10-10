@@ -2,16 +2,8 @@ import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import { collection, onSnapshot, DocumentData } from "firebase/firestore"
-import db from "../firebase/firebase"
+import {db} from "../firebase/firebase"
 import { useEffect, useState } from 'react'
-
-type CourseProps = {
-    id: string;
-    name: string;
-    place: string;
-    holes: number;
-    img: string;
-}
 
 const StyledCourse = styled.div`
     margin: 5px;
@@ -57,7 +49,7 @@ const Course: React.FC = ()=>{
     return (
         data.map((course : DocumentData) => (
             <StyledCourse>
-                <IMG src={course.img} alt="v"/>
+                <IMG src={course.img} alt={course.name}/>
                 <H1>{course.name}</H1>
                 <Desc>{course.place}</Desc>
                 <Desc>{course.holes} jamek</Desc>

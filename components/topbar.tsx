@@ -1,6 +1,9 @@
+import { onAuthStateChanged } from '@firebase/auth';
 import Link from 'next/link';
 import React from 'react'
 import styled from 'styled-components'
+import { auth } from '../firebase/firebase';
+import { useAuth } from './login';
 
 const TopBarWrap = styled.header`
 display: flex;
@@ -36,6 +39,9 @@ const MenuButton = styled.h2`
 `;
 
 const TopBar: React.FC = () => {
+
+    const { user, login, logout } = useAuth();
+
     return (
         <TopBarWrap>
             <Link href="/">
@@ -52,6 +58,17 @@ const TopBar: React.FC = () => {
                 <MenuButton>
                     Kontakt
                 </MenuButton>
+
+                {!user ? (
+                    <MenuButton onClick={login}>
+                        Login
+                    </MenuButton>
+                    ) : (
+                    <MenuButton onClick={logout}>
+                        Logout
+                    </MenuButton>
+                )}
+
             </Buttons>
         </TopBarWrap>
     );
