@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
-import { collection, onSnapshot, DocumentData } from "firebase/firestore"
+import { collection, onSnapshot, DocumentData, setDoc } from "firebase/firestore"
 import {db} from "../firebase/firebase"
 import { useEffect, useState } from 'react'
 
@@ -40,20 +40,22 @@ const Course: React.FC = ()=>{
     useEffect(
     () => {
       onSnapshot(collection(db, "courses"), (snap) => {
-        setData(snap.docs.map(doc => doc.data()));
+        setData(snap.docs.map(doc => ({...doc.data(), id: doc.id})));
       }), []
-    }
-      
-    )
+    })
+
+    
 
     return (
         data.map((course : DocumentData) => (
+            <Link href="/[course]" as={`/${course.id}`} key={course.id}>
             <StyledCourse>
                 <IMG src={course.img} alt={course.name}/>
                 <H1>{course.name}</H1>
                 <Desc>{course.place}</Desc>
                 <Desc>{course.holes} jamek</Desc>
             </StyledCourse>
+            </Link>
         ))
     );
 };
