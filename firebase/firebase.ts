@@ -1,5 +1,6 @@
 import { getFirestore } from "@firebase/firestore";
 import {initializeApp} from "firebase/app";
+import {getStorage} from "firebase/storage";
 import {getAuth} from "firebase/auth";
 
 const firebaseConfig = {
@@ -15,6 +16,5 @@ const app = initializeApp(firebaseConfig)
 
 const db = getFirestore(app);
 const auth = getAuth(app);
-
-
-export {db, auth}
+const storage = getStorage(app, "gs://mp-databaze.appspot.com/");
+export {db, auth, storage}

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
-import { collection, onSnapshot, DocumentData, setDoc } from "firebase/firestore"
+import { collection, onSnapshot, DocumentData } from "firebase/firestore"
 import {db} from "../firebase/firebase"
 import { useEffect, useState } from 'react'
 
@@ -43,7 +43,6 @@ const Course: React.FC = ()=>{
         setData(snap.docs.map(doc => ({...doc.data(), id: doc.id})));
       }), []
     })
-
     
 
     return (

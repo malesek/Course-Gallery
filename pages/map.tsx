@@ -1,46 +1,62 @@
 import type { NextPage } from 'next'
 import TopBar from '../components/topbar'
-import React, { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { onSnapshot, collection, DocumentData } from '@firebase/firestore'
 import { db } from '../firebase/firebase'
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api'
+import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api'
 import styled from 'styled-components'
 
 const Map: NextPage = () => {
 
   const [data, setData] = useState<DocumentData>([]);
+  const [selCourse, setSelCourse] = useState<DocumentData>([]);
+  const [pickedCourse, setPickedCourse] = useState(false);
 
-    useEffect(
+  useEffect(
     () => {
       onSnapshot(collection(db, "courses"), (snap) => {
-        setData(snap.docs.map(doc => ({...doc.data(), id: doc.id})));
+        setData(snap.docs.map(doc => ({ ...doc.data(), id: doc.id })));
       }), []
     })
-    const {isLoaded} = useLoadScript({
-      googleMapsApiKey: "AIzaSyCbEOvWjYpb1OwoIAnYELfVy8B5dQM2j00",
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: "AIzaSyCbEOvWjYpb1OwoIAnYELfVy8B5dQM2j00",
   });
 
   const mapContainerStyle = {
-      width: "50vw",
-      height: "50vh"
+    width: '80rem',
+    height: '30rem'
   };
 
-  if(!isLoaded) return <h1>Loading Site</h1>;
+  if (!isLoaded) return <h1>Loading Site</h1>;
 
-  return(
-      <>
-          <TopBar/>
-          <GoogleMap
-          mapContainerStyle={mapContainerStyle}
-          zoom={10}
-          center= {{lat: 50.131675, lng: 15.739500}}
+  return (
+    <>
+      <TopBar />
+      <GoogleMap
+        mapContainerStyle={mapContainerStyle}
+        zoom={10}
+        center={{ lat: 50.131675, lng: 15.739500 }}
+      >
+        {data.map((course: DocumentData) => (
+          <Marker
+            position={{ lat: course.lat, lng: course.lng }}
+            onClick={() => { setSelCourse(course), setPickedCourse(true) }}
+          />
+        ))}
+        {pickedCourse && (
+          <InfoWindow
+            position={{ lat: selCourse.lat, lng: selCourse.lng }}
+            onCloseClick={() => setPickedCourse(false)}
           >
-            {data.map((course: DocumentData) => 
-              <Marker position={{lat: course.lat, lng: course.lng}}></Marker>
-            )}
-              
-          </GoogleMap>
-      </>
+            <>
+              <h1>{selCourse.name}</h1>
+            </>
+
+          </InfoWindow>
+        )}
+      </GoogleMap>
+    </>
   );
 }
+
 export default Map
