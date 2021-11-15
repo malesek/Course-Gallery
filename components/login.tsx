@@ -12,7 +12,7 @@ const AuthContext = createContext<Authentication>({
   user:null, login: () => {}, logout: () => {}
 });
 
-const AuthProvider: FC = ({children}) => {
+const AuthProvider: React.FC = ({children}) => {
 
   const [user, setUser] = useState<User | null>(null);
 

@@ -1,9 +1,9 @@
-import { useState } from "react"
+import { useCallback, useState } from "react"
+import useStorage from "./storage";
 import UploadClick from "./uploadClick";
 
-const UploadForm = () => {
+const UploadForm = ({folderName}) => {
   const [file, setFile] = useState(null);  
-
   const changeHandler = (x : any) => {
       const selected = x.target.files[0];
 
@@ -11,16 +11,18 @@ const UploadForm = () => {
           setFile(selected);
       }
   }
+  const useClick = (event: any) => {
+    event.preventDefault()
+    useStorage(file, folderName)
+  }
   return(
       <>
-      <form>
+      <form onSubmit={useClick}>
           <input type="file" onChange={changeHandler}/>
+          <button type="submit">Upload</button>
       </form>
-      <div>
-        {file && <UploadClick file={file}/>}
-      </div>
       </>
   )
 }
-
+//file && <UploadClick file={file} folderName={folderName}/>
 export default UploadForm;
