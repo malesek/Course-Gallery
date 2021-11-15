@@ -4,12 +4,14 @@ import styled from "styled-components";
 import { collection, onSnapshot, DocumentData } from "firebase/firestore"
 import {db} from "../firebase/firebase"
 import { useEffect, useState } from 'react'
+import Head from "next/head";
+
 
 const StyledCourse = styled.div`
     margin: 5px;
     border: 1px solid #ccc;
     float: left;
-    width: 300px;
+    width: 302px;
     cursor: pointer;
     &:hover {
         border: 1px solid #777;
@@ -29,32 +31,36 @@ const Desc = styled.div`
 const IMG = styled.img`
     width: 290px;
     height: 150px;
-    margin: 5px;
-    padding: 0;
+    margin: 5px 5px 0 5px
 `
 
-const Course: React.FC = ()=>{
+const Course: React.FC = () => {
 
     const [data, setData] = useState<DocumentData>([]);
 
     useEffect(
-    () => {
-      onSnapshot(collection(db, "courses"), (snap) => {
-        setData(snap.docs.map(doc => ({...doc.data(), id: doc.id})));
-      }), []
-    })
-    
+        () => {
+            onSnapshot(collection(db, "courses"), (snap) => {
+                setData(snap.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+            }), []
+        })
+
 
     return (
-        data.map((course : DocumentData) => (
-            <Link href="/[course]" as={`/${course.id}`} key={course.id}>
-            <StyledCourse>
-                <IMG src={course.img} alt={course.name}/>
-                <H1>{course.name}</H1>
-                <Desc>{course.place}</Desc>
-                <Desc>{course.holes} jamek</Desc>
-            </StyledCourse>
-            </Link>
+        data.map((course: DocumentData) => (
+            <>
+                <Head>
+                    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet" />
+                </Head>
+                <Link href="/[course]" as={`/${course.id}`} key={course.id}>
+                    <StyledCourse>
+                        <IMG src={course.img} alt={course.name} />
+                        <H1>{course.name}</H1>
+                        <Desc>{course.place}</Desc>
+                        <Desc>{course.holes} jamek</Desc>
+                    </StyledCourse>
+                </Link>
+            </>
         ))
     );
 };

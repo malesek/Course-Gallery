@@ -1,8 +1,11 @@
-import { useCallback, useState } from "react"
+import { useState } from "react"
 import useStorage from "./storage";
-import UploadClick from "./uploadClick";
 
-const UploadForm = ({folderName}) => {
+type Props = {
+  folderName: string
+}
+
+const UploadForm:React.FC<Props> = ({folderName}) => {
   const [file, setFile] = useState(null);  
   const changeHandler = (x : any) => {
       const selected = x.target.files[0];

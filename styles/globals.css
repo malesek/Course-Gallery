@@ -14,3 +14,8 @@ a {
 * {
   box-sizing: border-box;
 }
+
+@font-face {
+  font-family: "Lato-Black";
+  src: url("/fonts/Lato/Lato-Black.ttf");
+}

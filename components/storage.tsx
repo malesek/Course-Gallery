@@ -3,7 +3,7 @@ import { storage } from "../firebase/firebase";
 import { addDoc, collection } from "@firebase/firestore";
 import { db } from "../firebase/firebase";
 
-const useStorage = (file: any, folderName) => {
+const useStorage = (file: any, folderName: string) => {
         const storageRef = ref(storage, file.name);
         const uploadTask = uploadBytesResumable(storageRef, file);
         uploadTask.on('state_changed',
