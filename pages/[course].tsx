@@ -52,9 +52,6 @@ const SingleCourse: NextPage<Props> = () => {
         <TopBar/>
         <H1>{data.name}</H1>
         <Info>{data.desc}</Info>
-        {user &&
-          <UploadForm folderName={data.id}/>
-        }
         {imgData.map((image: DocumentData) => (
             <img src={image.url} alt={image.url} width="20%"/>
         ))}
