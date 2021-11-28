@@ -4,8 +4,12 @@ import { storage } from "../firebase/firebase";
 import { addDoc, collection } from "@firebase/firestore";
 import { db } from "../firebase/firebase";
 
+<<<<<<< Updated upstream
 const storageUpload = (file: any) => {
     useEffect(() => {
+=======
+const saveStorage = (file: any, folderName: string) => {
+>>>>>>> Stashed changes
         const storageRef = ref(storage, file.name);
         const uploadTask = uploadBytesResumable(storageRef, file);
         uploadTask.on('state_changed',
@@ -37,4 +41,8 @@ const storageUpload = (file: any) => {
     }, [])
 }
 
+<<<<<<< Updated upstream
 export default storageUpload;
+=======
+export default saveStorage;
+>>>>>>> Stashed changes

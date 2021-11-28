@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { useState } from "react"
 import UploadClick from "./uploadClick";
 
@@ -23,4 +24,24 @@ const UploadForm = () => {
   )
 }
 
+=======
+import styled from "styled-components";
+
+const UploadForm:React.FC = () => {
+  const Input = styled.input`
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+  `
+  return(
+      <>
+      <Input type="file" name="file" id="file"/>
+      <label htmlFor="file">Vyberte Soubor</label>
+      </>
+  )
+}
+>>>>>>> Stashed changes
 export default UploadForm;

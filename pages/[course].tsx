@@ -27,10 +27,19 @@ const SingleCourse: NextPage<Props> = () => {
     return(
       <>
         <TopBar/>
+<<<<<<< Updated upstream
         <h1>{data.id}</h1>
         <p>{data.desc}</p>
         <UploadForm/>
       </>
+=======
+        <H1>{data.name}</H1>
+        <Info>{data.desc}</Info>
+        {imgData.map((image: DocumentData) => (
+            <img src={image.url} alt={image.url} width="20%"/>
+        ))}
+      </Font>
+>>>>>>> Stashed changes
     )
 }
 

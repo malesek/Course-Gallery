@@ -1,8 +1,6 @@
-import { onAuthStateChanged } from '@firebase/auth';
 import Link from 'next/link';
 import React from 'react'
 import styled from 'styled-components'
-import { auth } from '../firebase/firebase';
 import { useAuth } from './login';
 
 const TopBarWrap = styled.header`
@@ -63,10 +61,17 @@ const TopBar: React.FC = () => {
                     <MenuButton onClick={login}>
                         Login
                     </MenuButton>
-                    ) : (
-                    <MenuButton onClick={logout}>
-                        Logout
-                    </MenuButton>
+                ) : (
+                        <>
+                            <Link href="/addPhotos">
+                                <MenuButton>
+                                    Přidat Fotku
+                                </MenuButton>
+                            </Link>
+                            <MenuButton onClick={logout}>
+                                Logout
+                            </MenuButton>
+                        </>
                 )}
 
             </Buttons>
