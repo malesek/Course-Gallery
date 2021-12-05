@@ -23,7 +23,7 @@ const Map: NextPage = () => {
   });
 
   const mapContainerStyle = {
-    width: '80rem',
+    width: '364px',
     height: '30rem'
   };
 

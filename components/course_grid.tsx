@@ -48,11 +48,8 @@ const Course: React.FC = () => {
 
     return (
         data.map((course: DocumentData) => (
-            <>
-                <Head>
-                    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet" />
-                </Head>
-                <Link href="/[course]" as={`/${course.id}`} key={course.id}>
+            <React.Fragment key={course.id}>
+                <Link href="/[course]" as={`/${course.id}`}>
                     <StyledCourse>
                         <IMG src={course.img} alt={course.name} />
                         <H1>{course.name}</H1>
@@ -60,7 +57,7 @@ const Course: React.FC = () => {
                         <Desc>{course.holes} jamek</Desc>
                     </StyledCourse>
                 </Link>
-            </>
+            </React.Fragment>
         ))
     );
 };

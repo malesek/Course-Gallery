@@ -8,6 +8,8 @@ import UploadForm from "../components/upload";
 import styled from "styled-components"
 import Head from "next/head"
 import {useAuth} from "../components/login"
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index"
 
 type Props={
   route: ReactNode;
@@ -17,9 +19,7 @@ const H1 = styled.h1`
 text-align: center;
 font-family: 'Open Sans', sans-serif;
 `
-const Font = styled.div`
-font-family: 'Open Sans', sans-serif;
-`;
+
 const Info = styled.p`
 font-family: 'Open Sans', sans-serif;
 font-weight: 400;
@@ -45,17 +45,14 @@ const SingleCourse: NextPage<Props> = () => {
       , [router]
     })
     return(
-      <Font>
-        <Head>
-          <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet"/>
-        </Head>
+      <>
         <TopBar/>
         <H1>{data.name}</H1>
         <Info>{data.desc}</Info>
         {imgData.map((image: DocumentData) => (
             <img src={image.url} alt={image.url} width="20%"/>
         ))}
-      </Font>
+        </>
     )
 }
 

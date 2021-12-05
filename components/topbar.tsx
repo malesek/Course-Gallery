@@ -3,6 +3,7 @@ import Link from 'next/link';
 import React from 'react'
 import styled from 'styled-components'
 import { auth } from '../firebase/firebase';
+import AddPhotos from './addPhotos';
 import { useAuth } from './login';
 
 const TopBarWrap = styled.header`
@@ -65,16 +66,11 @@ const TopBar: React.FC = () => {
                     </MenuButton>
                     ) : (
                     <>
-                    <Link href="/addPhotos">
-                    <MenuButton>
-                        Přidat Fotky
-                    </MenuButton>
-                    </Link>
+                    <AddPhotos/>
                     <MenuButton onClick={logout}>
                         Logout
                     </MenuButton>
                     </>
-                    
                 )}
 
             </Buttons>

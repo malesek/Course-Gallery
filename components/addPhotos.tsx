@@ -1,27 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase/firebase";
 import { collection, DocumentData, onSnapshot } from "firebase/firestore";
-import Router from 'next/router'
 import saveStorage from "../components/storage";
 import Link from "next/link";
 import styled from "styled-components";
-import TopBar from "../components/topbar";
-import Head from "next/dist/shared/lib/head";
+import { useAuth } from "../components/login";
+import Popup from "reactjs-popup";
 
-const AddPhotos = () => {
+const AddPhotos:React.FC = () => {
     const [data, setData] = useState<DocumentData>([]);
     const [courseName, setCourseName] = useState<string>("");
     const [file, setFile] = useState(null);
-    
 
     const Input = styled.input`
-    opacity: 0;
     width: 0.1px;
     height: 0.1px;
     position: absolute;
     `
     const Label = styled.label`
-    display: block;
     position: relative;
     width: 200px;
     height: 50px;
@@ -35,7 +31,8 @@ const AddPhotos = () => {
     color: #fff;
     font-weight: bold;
     cursor: pointer;
-    transition: transform .2s ease-out;`
+    transition: transform .2s ease-out;
+    `
     
     const Submit = styled.button`
     font-family: inherit;
@@ -67,6 +64,7 @@ const AddPhotos = () => {
     background: linear-gradient(60deg, #000555, #000999);
     padding: 2px;
     `
+
     useEffect(
         () => {
             onSnapshot(collection(db, "courses"), (snap) => {
@@ -91,33 +89,26 @@ const AddPhotos = () => {
         saveStorage(file, courseName)
     }
 
-    const Font = styled.div`
-    font-family: 'Open Sans', sans-serif;
-    `;
-
     return (
-        <Font>
-            <Head>
-            <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet"/>
-            </Head>
-            <TopBar/>
-            <form onSubmit={useClick}>
-                <select onChange={chosenCourse}>
-                    {data.map((course: DocumentData) => (
-                        <option value={course.id} defaultValue={course.id} key={course.id}>{course.name}</option>
-                    ))}
-                </select>
+        <Popup trigger={<button>Přidat Fotky</button>} modal>
+        <form onSubmit={useClick}>
+            <select onChange={chosenCourse}>
+                {data.map((course: DocumentData) => (
+                    <option value={course.id} defaultValue={course.id} key={course.id}>{course.name}</option>
+                ))}
+            </select>
 
-                <Input type="file" id="file" onChange={changeHandler} />
-                <Label htmlFor="file">Vyberte Soubor</Label>
+            <Input type="file" id="file" onChange={changeHandler} />
+            <Label htmlFor="file">Vyberte Soubor</Label>
 
-                <Link href="/">
-                    <ButtonGradient>
-                        <Submit type="submit">Upload</Submit>
-                    </ButtonGradient>
-                </Link>
-            </form>
-        </Font>
+            <Link href="/">
+                <ButtonGradient>
+                    <Submit type="submit">Upload</Submit>
+                </ButtonGradient>
+            </Link>
+        </form>
+        </Popup>
     )
 }
+
 export default AddPhotos;
