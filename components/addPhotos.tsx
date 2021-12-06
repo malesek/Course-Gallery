@@ -2,15 +2,8 @@ import React, { useEffect, useState } from "react";
 import { db } from "../firebase/firebase";
 import { collection, DocumentData, onSnapshot } from "firebase/firestore";
 import saveStorage from "../components/storage";
-import Link from "next/link";
 import styled from "styled-components";
-import { useAuth } from "../components/login";
 import Popup from "reactjs-popup";
-
-const AddPhotos:React.FC = () => {
-    const [data, setData] = useState<DocumentData>([]);
-    const [courseName, setCourseName] = useState<string>("");
-    const [file, setFile] = useState(null);
 
     const Input = styled.input`
     width: 0.1px;
@@ -19,7 +12,7 @@ const AddPhotos:React.FC = () => {
     `
     const Label = styled.label`
     position: relative;
-    width: 200px;
+    width: 90%;
     height: 50px;
     border-radius: 15px;
     background: linear-gradient(60deg, #000999, #000555);
@@ -43,6 +36,7 @@ const AddPhotos:React.FC = () => {
     justify-content: center;
     color: #000555;
     font-weight: bold;
+    font-size: 16px;
     cursor: pointer;
     transition: transform .2s ease-out;
     border: 0px;
@@ -57,13 +51,55 @@ const AddPhotos:React.FC = () => {
     margin: 10px auto;
     box-shadow: 0 4px 7px rgba(0, 0, 0, 0.6);
     border-radius: 15px;
-    width: 200px;
+    width: 90%;
     height: 50px;
     position: relative;
     padding: 1rem;
     background: linear-gradient(60deg, #000555, #000999);
     padding: 2px;
     `
+    const MenuButton = styled.h2`
+    font-size: 20px;
+    cursor: pointer;
+    color: #fffff0;
+    padding: 3px;
+    margin: auto 5px;
+
+    &:hover{
+        background-color: #000999;
+    }
+    `
+    const Select = styled.select`
+    display: flex;
+    font-weight: bold;
+    color: #fff;
+    width: 90%;
+    height: 35px;
+    padding-left: 5px;
+    border: none;
+    position: relative;
+    background: linear-gradient(60deg, #000555, #000999);
+    border-radius: 15px;
+    margin: auto;
+    `;
+    const Option = styled.option`
+    display: flex;
+    color: black;
+    white-space: pre;
+    min-height: 20px;
+    padding: 0px 2px 1px;
+    `
+    const Div = styled.div`
+    background: #333999;
+    width: 300px;
+    padding: 20px;
+    border-radius: 25px;
+    `
+
+const AddPhotos:React.FC = () => {
+    const [data, setData] = useState<DocumentData>([]);
+    const [courseName, setCourseName] = useState<string>("");
+    const [file, setFile] = useState(null);
 
     useEffect(
         () => {
@@ -85,28 +121,29 @@ const AddPhotos:React.FC = () => {
         }
     }
 
-    const useClick = () => {
+    const useClick = (event: any) => {
+        event.preventDefault()
         saveStorage(file, courseName)
     }
 
     return (
-        <Popup trigger={<button>Přidat Fotky</button>} modal>
+        <Popup trigger={<MenuButton>Přidat Fotky</MenuButton>} modal>
+            <Div>
         <form onSubmit={useClick}>
-            <select onChange={chosenCourse}>
+            <Select onChange={chosenCourse}>
                 {data.map((course: DocumentData) => (
-                    <option value={course.id} defaultValue={course.id} key={course.id}>{course.name}</option>
+                    <Option value={course.id} defaultValue={course.id} key={course.id}>{course.name}</Option>
                 ))}
-            </select>
-
+            </Select>
+            
             <Input type="file" id="file" onChange={changeHandler} />
             <Label htmlFor="file">Vyberte Soubor</Label>
-
-            <Link href="/">
-                <ButtonGradient>
-                    <Submit type="submit">Upload</Submit>
-                </ButtonGradient>
-            </Link>
+            
+            <ButtonGradient>
+                <Submit type="submit">Upload</Submit>
+            </ButtonGradient>
         </form>
+        </Div>
         </Popup>
     )
 }
