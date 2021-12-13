@@ -4,12 +4,8 @@ import { useRouter } from "next/dist/client/router";
 import { useEffect, useState, ReactNode } from "react";
 import { db } from "../firebase/firebase";
 import TopBar from "../components/topbar";
-import UploadForm from "../components/upload";
 import styled from "styled-components"
-import Head from "next/head"
 import {useAuth} from "../components/login"
-import Popup from "reactjs-popup";
-import "reactjs-popup/dist/index"
 
 type Props={
   route: ReactNode;
@@ -50,7 +46,7 @@ const SingleCourse: NextPage<Props> = () => {
         <H1>{data.name}</H1>
         <Info>{data.desc}</Info>
         {imgData.map((image: DocumentData) => (
-            <img src={image.url} alt={image.url} width="20%"/>
+            <img src={image.url} alt={image.url} key={image.url} width="20%"/>
         ))}
         </>
     )

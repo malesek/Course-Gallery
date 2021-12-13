@@ -48,16 +48,14 @@ const Course: React.FC = () => {
 
     return (
         data.map((course: DocumentData) => (
-            <React.Fragment key={course.id}>
-                <Link href="/[course]" as={`/${course.id}`}>
-                    <StyledCourse>
-                        <IMG src={course.img} alt={course.name} />
-                        <H1>{course.name}</H1>
-                        <Desc>{course.place}</Desc>
-                        <Desc>{course.holes} jamek</Desc>
-                    </StyledCourse>
-                </Link>
-            </React.Fragment>
+            <Link href="/[course]" as={`/${course.id}`}>
+                <StyledCourse>
+                    <IMG src={course.img} alt={course.name} />
+                    <H1>{course.name}</H1>
+                    <Desc>{course.place}</Desc>
+                    <Desc>{course.holes} jamek</Desc>
+                </StyledCourse>
+            </Link>
         ))
     );
 };

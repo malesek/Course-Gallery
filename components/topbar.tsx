@@ -66,6 +66,11 @@ const TopBar: React.FC = () => {
                     </MenuButton>
                     ) : (
                     <>
+                    <Link href="/admin">
+                    <MenuButton>
+                        Admin
+                    </MenuButton>
+                    </Link>
                     <AddPhotos/>
                     <MenuButton onClick={logout}>
                         Logout
