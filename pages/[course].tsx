@@ -5,7 +5,6 @@ import { useEffect, useState, ReactNode } from "react";
 import { db } from "../firebase/firebase";
 import TopBar from "../components/topbar";
 import styled from "styled-components"
-import {useAuth} from "../components/login"
 
 type Props={
   route: ReactNode;
@@ -25,7 +24,6 @@ const SingleCourse: NextPage<Props> = () => {
     const router = useRouter();
     const [data, setData] = useState<DocumentData>([]);
     const [imgData, setImgData] = useState<DocumentData>([]);
-    const {user} = useAuth();
     useEffect(
     () => {
       const courseId = router.query.course
@@ -46,7 +44,15 @@ const SingleCourse: NextPage<Props> = () => {
         <H1>{data.name}</H1>
         <Info>{data.desc}</Info>
         {imgData.map((image: DocumentData) => (
-            <img src={image.url} alt={image.url} key={image.url} width="20%"/>
+          <>
+            {image.validate && 
+              (
+                <>
+                <img src={image.url} alt={image.url} key={image.url} width="20%"/>
+                </>
+              )
+            }
+          </>
         ))}
         </>
     )

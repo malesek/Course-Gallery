@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { collection, onSnapshot, DocumentData } from "firebase/firestore"
 import {db} from "../firebase/firebase"
 import { useEffect, useState } from 'react'
-import Head from "next/head";
 
 
 const StyledCourse = styled.div`

@@ -1,8 +1,6 @@
-import { onAuthStateChanged } from '@firebase/auth';
 import Link from 'next/link';
 import React from 'react'
 import styled from 'styled-components'
-import { auth } from '../firebase/firebase';
 import AddPhotos from './addPhotos';
 import { useAuth } from './login';
 

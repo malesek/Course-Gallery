@@ -25,8 +25,7 @@ const saveStorage = (file: any, folderName: string) => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                     console.log('File available at', downloadURL);
                     addDoc(collection(db, folderName), {
-                        url: downloadURL,
-                        validate: false
+                        url: downloadURL
                     });
                 });
                

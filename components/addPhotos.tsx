@@ -5,12 +5,12 @@ import saveStorage from "../components/storage";
 import styled from "styled-components";
 import Popup from "reactjs-popup";
 
-    const Input = styled.input`
+const Input = styled.input`
     width: 0.1px;
     height: 0.1px;
     position: absolute;
     `
-    const Label = styled.label`
+const Label = styled.label`
     position: relative;
     width: 90%;
     height: 50px;
@@ -26,8 +26,8 @@ import Popup from "reactjs-popup";
     cursor: pointer;
     transition: transform .2s ease-out;
     `
-    
-    const Submit = styled.button`
+
+const Submit = styled.button`
     font-family: inherit;
     font-weight: bold;
     border-radius: 13px;
@@ -46,7 +46,7 @@ import Popup from "reactjs-popup";
         color: white
     }`
 
-    const ButtonGradient = styled.div`
+const ButtonGradient = styled.div`
     display: flex;
     margin: 10px auto;
     box-shadow: 0 4px 7px rgba(0, 0, 0, 0.6);
@@ -58,7 +58,7 @@ import Popup from "reactjs-popup";
     background: linear-gradient(60deg, #000555, #000999);
     padding: 2px;
     `
-    const MenuButton = styled.h2`
+const MenuButton = styled.h2`
     font-size: 20px;
     cursor: pointer;
     color: #fffff0;
@@ -69,7 +69,7 @@ import Popup from "reactjs-popup";
         background-color: #000999;
     }
     `
-    const Select = styled.select`
+const Select = styled.select`
     display: flex;
     font-weight: bold;
     color: #fff;
@@ -82,24 +82,25 @@ import Popup from "reactjs-popup";
     border-radius: 15px;
     margin: auto;
     `;
-    const Option = styled.option`
+const Option = styled.option`
     display: flex;
     color: black;
     white-space: pre;
     min-height: 20px;
     padding: 0px 2px 1px;
     `
-    const Div = styled.div`
+const Div = styled.div`
     background: #333999;
     width: 300px;
     padding: 20px;
     border-radius: 25px;
     `
 
-const AddPhotos:React.FC = () => {
+const AddPhotos: React.FC = () => {
     const [data, setData] = useState<DocumentData>([]);
-    const [courseName, setCourseName] = useState<string>("");
+    const [courseName, setCourseName] = useState<string>("gchk");
     const [file, setFile] = useState(null);
+    const [fileName, setFileName] = useState<string>("");
 
     useEffect(
         () => {
@@ -114,8 +115,8 @@ const AddPhotos:React.FC = () => {
 
     const changeHandler = (x: any) => {
         const selected = x.target.files[0];
-        const {name} = selected;
-        console.log(name)
+        const { name } = selected;
+        setFileName(name);
         if (selected) {
             setFile(selected);
         }
@@ -129,21 +130,21 @@ const AddPhotos:React.FC = () => {
     return (
         <Popup trigger={<MenuButton>Přidat Fotky</MenuButton>} modal>
             <Div>
-        <form onSubmit={useClick}>
-            <Select onChange={chosenCourse}>
-                {data.map((course: DocumentData) => (
-                    <Option value={course.id} defaultValue={course.id} key={course.id}>{course.name}</Option>
-                ))}
-            </Select>
-            
-            <Input type="file" id="file" onChange={changeHandler} />
-            <Label htmlFor="file">Vyberte Soubor</Label>
-            
-            <ButtonGradient>
-                <Submit type="submit">Upload</Submit>
-            </ButtonGradient>
-        </form>
-        </Div>
+                <form onSubmit={useClick}>
+                    <Select onChange={chosenCourse}>
+                        {data.map((course: DocumentData) => (
+                            <Option value={course.id} defaultValue={course.id} key={course.id}>{course.name}</Option>
+                        ))}
+                    </Select>
+
+                    <Input type="file" id="file" onChange={changeHandler} />
+                    <Label htmlFor="file">Vyberte Soubor</Label>
+                    <p>{fileName}</p>
+                    <ButtonGradient>
+                        <Submit type="submit">Upload</Submit>
+                    </ButtonGradient>
+                </form>
+            </Div>
         </Popup>
     )
 }

@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import { onSnapshot, collection, DocumentData } from '@firebase/firestore'
 import { db } from '../firebase/firebase'
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api'
-import styled from 'styled-components'
 
 const Map: NextPage = () => {
 

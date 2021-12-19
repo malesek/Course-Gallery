@@ -7,11 +7,15 @@ const Admin: NextPage = () => {
 
   const {user} = useAuth();
   const id = user?.uid;
-//id admina AxKCMrGftgM1uYueydTRgwqHmv83
+  
   return (
     <>
     <TopBar/>
-    <ValidatePhoto/>
+    {id === "AxKCMrGftgM1uYueydTRgwqHmv83" ? (
+      <ValidatePhoto key={id}/>
+    ):(
+      <h1>Nejste admin</h1>
+    )}
     </>
   )
 }
