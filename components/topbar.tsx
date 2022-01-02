@@ -49,30 +49,24 @@ const TopBar: React.FC = () => {
                 </CourseGallery>
             </Link>
             <Buttons>
-                <Link href="/map">
-                    <MenuButton>
-                        Mapa
-                    </MenuButton>
-                </Link>
                 <MenuButton>
                     Kontakt
                 </MenuButton>
-
                 {!user ? (
                     <MenuButton onClick={login}>
                         Login
                     </MenuButton>
-                    ) : (
+                ) : (
                     <>
-                    <Link href="/admin">
-                    <MenuButton>
-                        Admin
-                    </MenuButton>
-                    </Link>
-                    <AddPhotos/>
-                    <MenuButton onClick={logout}>
-                        Logout
-                    </MenuButton>
+                        <Link href="/admin">
+                            <MenuButton>
+                                Admin
+                            </MenuButton>
+                        </Link>
+                        <AddPhotos />
+                        <MenuButton onClick={logout}>
+                            Logout
+                        </MenuButton>
                     </>
                 )}
 

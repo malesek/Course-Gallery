@@ -134,7 +134,6 @@ const ValidatePhoto: React.FC = () => {
                             <AcceptButton
                             onClick={() =>
                                 updateDoc(doc(db, `gchk`, image.id), {
-                                    url: image.url,
                                     validate: true
                                 })
                             }>
