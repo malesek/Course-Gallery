@@ -3,6 +3,7 @@ import { onSnapshot, collection, DocumentData } from '@firebase/firestore'
 import { db } from '../firebase/firebase'
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api'
 import styled from 'styled-components'
+import React from 'react'
 
 const StyledCourse = styled.div`
     margin: 5px;
@@ -24,12 +25,20 @@ const Desc = styled.div`
         margin-bottom: 3%;
     }
 `;
-
+const IW = styled(InfoWindow)`
+z-index:+4;
+`
 const IMG = styled.img`
     width: 290px;
     height: 150px;
     margin: 5px 5px 0 5px
 `
+const mapContainerStyle = {
+  width: '600px',
+  height: '30rem'
+};
+
+const center = { lat: 50.190841, lng: 15.668542 };
 
 const Map: React.FC = () => {
 
@@ -44,21 +53,16 @@ const Map: React.FC = () => {
       }), []
     })
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyCbEOvWjYpb1OwoIAnYELfVy8B5dQM2j00",
+    googleMapsApiKey: "AIzaSyBoxiAsFgb_VpPuhWeN-0dpUwIbMNOwbjY",
   });
 
-  const mapContainerStyle = {
-    width: '600px',
-    height: '30rem'
-  };
-
-  if (!isLoaded) return <h1>Loading Site</h1>;
+  if (!isLoaded) return <h1>Loading Map</h1>;
 
   return (
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={10}
-      center={{ lat: 50.190841, lng: 15.668542 }}
+      center={center}
     >
       {data.map((course: DocumentData) => (
         <Marker
@@ -67,10 +71,9 @@ const Map: React.FC = () => {
         />
       ))}
       {pickedCourse && (
-        <InfoWindow
+        <IW
           position={{ lat: selCourse.lat, lng: selCourse.lng }}
           onCloseClick={() => setPickedCourse(false)}
-
         >
           <>
             <IMG src={selCourse.img} alt={selCourse.name} />
@@ -78,8 +81,7 @@ const Map: React.FC = () => {
             <Desc>{selCourse.place}</Desc>
             <Desc>{selCourse.holes} jamek</Desc>
           </>
-
-        </InfoWindow>
+        </IW>
       )}
     </GoogleMap>
   );

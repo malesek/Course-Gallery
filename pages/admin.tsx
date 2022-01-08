@@ -3,6 +3,8 @@ import TopBar from '../components/topbar'
 import { useAuth } from '../components/login'
 import ValidatePhoto from '../components/validatePhoto'
 
+const admin = "AxKCMrGftgM1uYueydTRgwqHmv83";
+
 const Admin: NextPage = () => {
 
   const {user} = useAuth();
@@ -11,7 +13,7 @@ const Admin: NextPage = () => {
   return (
     <>
     <TopBar/>
-    {id === "AxKCMrGftgM1uYueydTRgwqHmv83" ? (
+    {id === admin ? (
       <ValidatePhoto key={id}/>
     ):(
       <h1>Nejste admin</h1>

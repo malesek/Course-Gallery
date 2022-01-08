@@ -38,7 +38,7 @@ const Courses: React.FC = () => {
 
     const [data, setData] = useState<DocumentData>([]);
     const [searchCourse, setSearchCourse] = useState("");
-    const [regionFilter, setRegionFilter] = useState(undefined);
+    const [regionFilter, setRegionFilter] = useState<string>("");
 
     useEffect(
         () => {
@@ -60,12 +60,12 @@ const Courses: React.FC = () => {
             </div>
             <div>
                 <select onChange={chosenRegion}>
-                    <option value={undefined}></option>
+                    <option value={""}></option>
                     <option value={"Královehradecký kraj"}>Královehradecký kraj</option>
                     <option value={"Pardubický kraj"}>Pardubický kraj</option>
                 </select>
                 <button onClick={() => {
-                    setRegionFilter(undefined);
+                    setRegionFilter("");
                 }}>Vymazat filtr</button>
             </div>
             <div>
@@ -77,7 +77,7 @@ const Courses: React.FC = () => {
                     else if (value.name.toLowerCase().includes(searchCourse.toLowerCase())) return value
                 }).map((course: DocumentData) => (
                     <>
-                        {regionFilter == course.region || regionFilter == undefined ? (
+                        {regionFilter == course.region || regionFilter == "" ? (
                             <Link href="/[course]" as={`/${course.id}`}>
                                 <StyledCourse>
                                     <IMG src={course.img} alt={course.name} />
