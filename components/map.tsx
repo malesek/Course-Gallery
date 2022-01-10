@@ -5,37 +5,31 @@ import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps
 import styled from 'styled-components'
 import React from 'react'
 
-const StyledCourse = styled.div`
-    margin: 5px;
-    border: 1px solid #ccc;
-    float: left;
-    width: 302px;
-    cursor: pointer;
-    &:hover {
-        border: 1px solid #777;
-    }
-`;
 const H1 = styled.h1`
     font-size: 20px;
     text-align: center;
 `;
+
 const Desc = styled.div`
     text-align: center;
     &:last-child{
         margin-bottom: 3%;
     }
 `;
+
 const IW = styled(InfoWindow)`
 z-index:+4;
 `
+
 const IMG = styled.img`
     width: 290px;
     height: 150px;
     margin: 5px 5px 0 5px
 `
+
 const mapContainerStyle = {
-  width: '600px',
-  height: '30rem'
+  width: '1000px',
+  height: '500px'
 };
 
 const center = { lat: 50.190841, lng: 15.668542 };

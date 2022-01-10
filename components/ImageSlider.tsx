@@ -1,23 +1,24 @@
 import { useEffect, useState } from "react"
-import { onSnapshot, collection, DocumentData, query, getDocs, where } from "@firebase/firestore"
+import { collection, DocumentData, query, getDocs, where } from "@firebase/firestore"
 import { db } from "../firebase/firebase";
-import Image from "next/image"
 import {FaArrowAltCircleRight, FaArrowAltCircleLeft} from "react-icons/fa"
 import styled from "styled-components"
 
 const Slider = styled.div`
 position: relative;
-  height: 100vh;
+  height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
 `
 
 const IMG = styled.img`
+  width:100%;
+  height:100%;
+  padding:0;
+  margin:0;
   border-radius: 10px;
-  width:1000px;
-  height:600px;
-`
+  `
 
 const LeftArrow = styled(FaArrowAltCircleLeft)`
   position: absolute;
@@ -29,6 +30,7 @@ const LeftArrow = styled(FaArrowAltCircleLeft)`
   cursor: pointer;
   user-select: none;
 `
+
 const RightArrow = styled(FaArrowAltCircleRight)`
 position: absolute;
   top: 50%;
@@ -40,6 +42,31 @@ position: absolute;
   user-select: none;
 `
 
+const PhotoDesc = styled.p`
+    position: absolute;
+    color: #fff;
+    font-size: 30px;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+`
+
+const ImageDiv = styled.div`
+    position:relative;
+    width:1000px;
+    height:600px;
+`
+
+const DescSpan = styled.div`
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20%;
+    background-color: rgba(0,0,0,0.8);
+    border-radius: 0 0 10px 10px;
+`
+
 type Props = {
     courseId: string | string[] | undefined
 }
@@ -49,12 +76,11 @@ const ImageSlider: React.FC<Props> = ({ courseId }) => {
 
     const [imgData, setImgData] = useState<DocumentData>([]);
     const [current, setCurrent] = useState(0);
-
     useEffect(() => {
-        fc()
+        dbQuery()
     })
 
-    const fc = async () => {
+    const dbQuery = async () => {
         const q = query(collection(db, `${courseId}`), where("validate", "==", true));
         const querySnapshot = await getDocs(q);
         const images = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
@@ -75,7 +101,19 @@ const ImageSlider: React.FC<Props> = ({ courseId }) => {
                 const image = imgData[index];
                 return (
                     <>
-                        {index == current && <IMG src={image.url} alt={image.url} key={image.url} />}
+                        {index == current &&
+                            <ImageDiv>
+                                <IMG src={image.url} alt={image.url} key={image.url} />
+                                {image.photoDesc &&
+                                    <DescSpan>
+                                        <PhotoDesc>
+                                            {image.photoDesc}
+                                        </PhotoDesc>
+                                    </DescSpan>
+                                }
+                            </ImageDiv>
+                        }
+
                     </>
                 )
             })}

@@ -3,7 +3,7 @@ import { storage } from "../firebase/firebase";
 import { addDoc, collection } from "@firebase/firestore";
 import { db } from "../firebase/firebase";
 
-const saveStorage = (file: any, folderName: string) => {
+const saveStorage = (file: any, folderName: string, photoDesc: string) => {
         const storageRef = ref(storage, file.name);
         const uploadTask = uploadBytesResumable(storageRef, file);
         uploadTask.on('state_changed',
@@ -25,7 +25,8 @@ const saveStorage = (file: any, folderName: string) => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                     console.log('File available at', downloadURL);
                     addDoc(collection(db, folderName), {
-                        url: downloadURL
+                        url: downloadURL,
+                        photoDesc: photoDesc
                     });
                 });
                

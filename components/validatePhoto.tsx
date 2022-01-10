@@ -57,6 +57,13 @@ display: flex;
 flex-direction: row;
 `
 
+const Desc = styled.div`
+    text-align: center;
+    &:last-child{
+        margin-bottom: 3%;
+    }
+`;
+
 const ValidatePhoto: React.FC = () => {
 
     const [gckhData, setGckhData] = useState<DocumentData>([]);
@@ -96,6 +103,7 @@ const ValidatePhoto: React.FC = () => {
                 (
                     <StyledCourse>
                         <IMG src={image.url} alt={image.id}/>
+                        <Desc>{image.photoDesc}</Desc>
                         <Buttons>
                             <AcceptButton
                             onClick={() =>
@@ -130,6 +138,7 @@ const ValidatePhoto: React.FC = () => {
                 (
                     <StyledCourse>
                         <IMG src={image.url} alt={image.id}/>
+                        <Desc>{image.photoDesc}</Desc>
                         <Buttons>
                             <AcceptButton
                             onClick={() =>
@@ -163,6 +172,7 @@ const ValidatePhoto: React.FC = () => {
                 (
                     <StyledCourse>
                         <IMG src={image.url} alt={image.id}/>
+                        <Desc>{image.photoDesc}</Desc>
                         <Buttons>
                             <AcceptButton
                             onClick={() =>
@@ -195,6 +205,7 @@ const ValidatePhoto: React.FC = () => {
                 (
                     <StyledCourse>
                         <IMG src={image.url} alt={image.id}/>
+                        <Desc>{image.photoDesc}</Desc>
                         <Buttons>
                         <AcceptButton
                             onClick={() =>

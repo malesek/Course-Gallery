@@ -20,11 +20,11 @@ type Props = {
 
 
 const SingleCourse: React.FC<Props> = ({ courseId }) => {
-    
+
     const [data, setData] = useState<DocumentData>([]);
 
     useEffect(() => {
-        onSnapshot(collection(db, `${courseId}`), (snap) => {
+        onSnapshot(collection(db, `courses`), (snap) => {
             const courses = snap.docs.map(doc => ({ ...doc.data(), id: doc.id }))
             const oneCourse = courses.find(x => x.id === courseId)
             setData(oneCourse);
@@ -33,8 +33,12 @@ const SingleCourse: React.FC<Props> = ({ courseId }) => {
 
     return (
         <>
+        {data &&
+            <>
             <H1>{data.name}</H1>
             <Info>{data.desc}</Info>
+            </>
+        }
         </>
     )
 }

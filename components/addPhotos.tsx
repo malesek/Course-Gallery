@@ -5,12 +5,17 @@ import saveStorage from "../components/storage";
 import styled from "styled-components";
 import Popup from "reactjs-popup";
 
-const Input = styled.input`
+const Form = styled.form`
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+`
+const FileInput = styled.input`
     width: 0.1px;
     height: 0.1px;
     position: absolute;
     `
-const Label = styled.label`
+const FileLabel = styled.label`
     position: relative;
     width: 90%;
     height: 50px;
@@ -95,12 +100,22 @@ const Div = styled.div`
     padding: 20px;
     border-radius: 25px;
     `
+const FileName = styled.p`
+    color: #fff;
+    text-align: center;
+    padding:0;
+    margin:0;`
+const TextInput = styled.input`
+    text-align:center;
+    margin-top: 10px;
+`
 
 const AddPhotos: React.FC = () => {
     const [data, setData] = useState<DocumentData>([]);
     const [courseName, setCourseName] = useState<string>("gchk");
     const [file, setFile] = useState(null);
     const [fileName, setFileName] = useState<string>("");
+    const [photoDesc, setPhotoDesc] = useState<string>("");
 
     useEffect(
         () => {
@@ -124,26 +139,29 @@ const AddPhotos: React.FC = () => {
 
     const useClick = (event: any) => {
         event.preventDefault()
-        saveStorage(file, courseName)
+        saveStorage(file, courseName, photoDesc)
     }
 
     return (
         <Popup trigger={<MenuButton>Přidat Fotky</MenuButton>} modal>
             <Div>
-                <form onSubmit={useClick}>
+                <Form onSubmit={useClick}>
                     <Select onChange={chosenCourse}>
                         {data.map((course: DocumentData) => (
                             <Option value={course.id} defaultValue={course.id} key={course.id}>{course.name}</Option>
                         ))}
                     </Select>
 
-                    <Input type="file" id="file" onChange={changeHandler} />
-                    <Label htmlFor="file">Vyberte Soubor</Label>
-                    <p>{fileName}</p>
+                    <FileInput type="file" id="file" onChange={changeHandler} accept="image/*"/>
+                    <FileLabel htmlFor="file">Vyberte Soubor</FileLabel>
+                    <FileName>{fileName}</FileName>
+
+                    <TextInput type="text" onChange={(event) => setPhotoDesc(event.target.value)} />
+
                     <ButtonGradient>
                         <Submit type="submit">Upload</Submit>
                     </ButtonGradient>
-                </form>
+                </Form>
             </Div>
         </Popup>
     )
