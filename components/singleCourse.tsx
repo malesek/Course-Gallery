@@ -5,13 +5,16 @@ import { db } from "../firebase/firebase"
 
 const H1 = styled.h1`
 text-align: center;
+font-weight: 900;
 font-family: 'Open Sans', sans-serif;
+font-size: 42px;
 `
 
 const Info = styled.p`
 font-family: 'Open Sans', sans-serif;
-font-weight: 400;
+font-weight: 600;
 margin: 10px 10% 10px 10%;
+font-size: 20px;
 `
 
 type Props = {

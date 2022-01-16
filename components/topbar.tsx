@@ -9,6 +9,7 @@ display: flex;
 padding: 12px 12px;
 align-items: center;
 background-color: #000555;
+height: 5%;
 `;
 
 const CourseGallery = styled.h2`
@@ -16,6 +17,7 @@ cursor: pointer;
 color: white;
 padding: 0;
 margin: 0;
+font-size: 35px;
 `;
 
 const Buttons = styled.div`
@@ -24,16 +26,15 @@ flex-direction: row;
 margin-left: auto;
 `;
 
-
-const MenuButton = styled.h2`
-    font-size: 20px;
+const MenuButton = styled.div`
+    font-size: 25px;
     cursor: pointer;
-    color: #fffff0;
-    padding: 3px;
-    margin: auto 5px;
-
+    color: #ffffff;
+    margin: auto 7px;
+    font-weight: 700;
+    height:100%;
     &:hover{
-        background-color: #000999;
+        background-color: #000666;
     }
 `;
 
@@ -77,3 +78,4 @@ const TopBar: React.FC = () => {
 }
 
 export default TopBar;
+export {MenuButton};

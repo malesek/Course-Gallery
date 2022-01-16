@@ -14,9 +14,7 @@ const StyledCourse = styled.div`
 `;
 
 const IMG = styled.img`
-    width: 290px;
-    height: 150px;
-    margin: 5px 5px 0 5px
+    max-width: 100%;
 `;
 
 const Buttons = styled.div`

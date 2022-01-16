@@ -9,12 +9,13 @@ position: relative;
   height: 70vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items:center;
+  margin-top: 80px;
 `
 
 const IMG = styled.img`
-  width:100%;
-  height:100%;
+  max-width:100%;
+  max-height: 100%;
   padding:0;
   margin:0;
   border-radius: 10px;
@@ -45,7 +46,7 @@ position: absolute;
 const PhotoDesc = styled.p`
     position: absolute;
     color: #fff;
-    font-size: 30px;
+    font-size: 20px;
     margin: auto;
     top: 50%;
     left: 50%;
@@ -56,6 +57,9 @@ const ImageDiv = styled.div`
     position:relative;
     width:1000px;
     height:600px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 `
 
 const DescSpan = styled.div`

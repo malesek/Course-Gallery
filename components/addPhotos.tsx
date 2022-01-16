@@ -4,6 +4,7 @@ import { collection, DocumentData, onSnapshot } from "firebase/firestore";
 import saveStorage from "../components/storage";
 import styled from "styled-components";
 import Popup from "reactjs-popup";
+import { MenuButton } from "./topbar";
 
 const Form = styled.form`
     display: flex;
@@ -62,17 +63,6 @@ const ButtonGradient = styled.div`
     padding: 1rem;
     background: linear-gradient(60deg, #000555, #000999);
     padding: 2px;
-    `
-const MenuButton = styled.h2`
-    font-size: 20px;
-    cursor: pointer;
-    color: #fffff0;
-    padding: 3px;
-    margin: auto 5px;
-
-    &:hover{
-        background-color: #000999;
-    }
     `
 const Select = styled.select`
     display: flex;

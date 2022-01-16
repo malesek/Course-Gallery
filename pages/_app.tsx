@@ -7,15 +7,18 @@ import Head from 'next/head'
 
 const GlobalStyle = createGlobalStyle`
 *{font-family: 'Open Sans', sans-serif;}
+body{
+  background-color: #f9f9ee
+}
 `
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return(
+  return (
     <React.Fragment>
-      <GlobalStyle/>
+      <GlobalStyle />
       <Head>
-                    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet" />
-                </Head>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet" />
+      </Head>
       <AuthProvider>
         <Component {...pageProps} />
       </AuthProvider>
