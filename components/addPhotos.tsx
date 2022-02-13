@@ -53,7 +53,7 @@ const Submit = styled.button`
     }`
 
 const ButtonGradient = styled.div`
-    display: flex;
+    display:flex;
     margin: 10px auto;
     box-shadow: 0 4px 7px rgba(0, 0, 0, 0.6);
     border-radius: 15px;
@@ -65,7 +65,6 @@ const ButtonGradient = styled.div`
     padding: 2px;
     `
 const Select = styled.select`
-    display: flex;
     font-weight: bold;
     color: #fff;
     width: 90%;
@@ -78,17 +77,17 @@ const Select = styled.select`
     margin: auto;
     `;
 const Option = styled.option`
-    display: flex;
     color: black;
     white-space: pre;
     min-height: 20px;
     padding: 0px 2px 1px;
     `
 const Div = styled.div`
-    background: #333999;
+    background-color: #00ffff;
     width: 300px;
     padding: 20px;
     border-radius: 25px;
+    border: 2px solid #000555;
     `
 const FileName = styled.p`
     color: #fff;
@@ -96,8 +95,13 @@ const FileName = styled.p`
     padding:0;
     margin:0;`
 const TextInput = styled.input`
+    margin:auto;
     text-align:center;
     margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #000555;
+    padding: 5px;
+    width: 90%;
 `
 
 const AddPhotos: React.FC = () => {

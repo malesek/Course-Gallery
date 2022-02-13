@@ -4,6 +4,8 @@ import { useEffect, useState, ReactNode } from "react";
 import TopBar from "../components/topbar";
 import ImageSlider from "../components/ImageSlider";
 import SingleCourse from "../components/singleCourse"
+import Rating from "../components/rating/rating";
+import { useAuth } from "../components/login";
 
 type Props={
   route: ReactNode;
@@ -12,7 +14,7 @@ type Props={
 const Course: NextPage<Props> = () => {
   const router = useRouter();
   const [courseId, setCourseId] = useState<string | string[] | undefined>();
-
+  const {user} = useAuth();
   useEffect(
     () => {
       setCourseId(router.query.course)
@@ -22,6 +24,7 @@ const Course: NextPage<Props> = () => {
     <>
       <TopBar />
       <SingleCourse courseId={courseId}/>
+      {user && <Rating courseId={courseId}/>}
       <ImageSlider courseId={courseId} />
     </>
   )

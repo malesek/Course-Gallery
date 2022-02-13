@@ -24,7 +24,7 @@ z-index:+4;
 const IMG = styled.img`
     width: 290px;
     height: 150px;
-    margin: 5px 5px 0 5px
+    margin: 5px 5px 0 5px;
 `
 
 const mapContainerStyle = {
