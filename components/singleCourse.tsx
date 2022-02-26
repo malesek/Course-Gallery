@@ -27,11 +27,12 @@ const SingleCourse: React.FC<Props> = ({ courseId }) => {
     const [data, setData] = useState<DocumentData>([]);
 
     useEffect(() => {
-        onSnapshot(collection(db, `courses`), (snap) => {
+        const unsub = onSnapshot(collection(db, `courses`), (snap) => {
             const courses = snap.docs.map(doc => ({ ...doc.data(), id: doc.id }))
             const oneCourse = courses.find(x => x.id === courseId)
             setData(oneCourse);
         })
+        return () => unsub()
     })
 
     return (

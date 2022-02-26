@@ -6,24 +6,23 @@ const saveRating = (courseId : string | string[] | undefined, stars : number, ui
     
     const dbQuery = async () => {
         const q = query(collection(db, `rating`), where("uid", "==", uid), where("courseId", "==", courseId));
-        const querySnapshot = await getDocs(q);
-        const rating = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+        const ratingQuery = await getDocs(q);
+        const rating = ratingQuery.docs.map(doc => ({ ...doc.data(), id: doc.id }));
         return rating;
     }
-    const neco = dbQuery()
-    neco.then(data => {
+    const ratingData = dbQuery();
+
+    ratingData.then(data => {
         console.log(data)
        if(data.length === 0){
         addDoc(collection(db, `rating`), {
-            uid: uid,
-            courseId: courseId,
-            stars: stars
+            uid, courseId, stars
         });
        }
        else{
         const docRef = doc(db, `rating`, data[0].id);
         updateDoc(docRef, {
-            stars: stars
+            stars
         })
        }
     })

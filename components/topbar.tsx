@@ -38,10 +38,11 @@ const MenuButton = styled.div`
     }
 `;
 
+const admin = "AxKCMrGftgM1uYueydTRgwqHmv83";
+
 const TopBar: React.FC = () => {
 
     const { user, login, logout } = useAuth();
-
     return (
         <TopBarWrap>
             <Link href="/">
@@ -59,11 +60,13 @@ const TopBar: React.FC = () => {
                     </MenuButton>
                 ) : (
                     <>
+                    {user.uid === admin &&
                         <Link href="/admin">
                             <MenuButton>
                                 Admin
                             </MenuButton>
                         </Link>
+                    }
                         <AddPhotos />
                         <MenuButton onClick={logout}>
                             Logout

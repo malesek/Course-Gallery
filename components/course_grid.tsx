@@ -1,8 +1,8 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
-import { collection, onSnapshot, DocumentData } from "firebase/firestore"
-import {db} from "../firebase/firebase"
+import { collection, onSnapshot, DocumentData, Unsubscribe } from "firebase/firestore"
+import { db } from "../firebase/firebase"
 import { useEffect, useState } from 'react'
 import Map from "./map";
 
@@ -95,11 +95,11 @@ const Courses: React.FC = () => {
 
     useEffect(
         () => {
-            onSnapshot(collection(db, "courses"), (snap) => {
+            const unsub = onSnapshot(collection(db, "courses"), (snap) => {
                 setData(snap.docs.map(doc => ({ ...doc.data(), id: doc.id })));
-            }), []
-        })
-
+            })
+            return () => unsub()
+        }, [])
     return (
         <>
             <Mapa>
@@ -123,7 +123,7 @@ const Courses: React.FC = () => {
                     }}>Vymazat filtr</Button>
                 </div>
             </Filters>
-            
+
             <Line />
 
 

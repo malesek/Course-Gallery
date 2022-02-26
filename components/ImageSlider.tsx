@@ -82,6 +82,7 @@ const ImageSlider: React.FC<Props> = ({ courseId }) => {
     const [current, setCurrent] = useState(0);
     useEffect(() => {
         dbQuery()
+        return () => {dbQuery()}
     })
 
     const dbQuery = async () => {

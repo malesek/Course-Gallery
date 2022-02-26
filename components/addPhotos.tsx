@@ -113,10 +113,11 @@ const AddPhotos: React.FC = () => {
 
     useEffect(
         () => {
-            onSnapshot(collection(db, "courses"), (snap) => {
+            const unsub = onSnapshot(collection(db, "courses"), (snap) => {
                 setData(snap.docs.map(doc => ({ ...doc.data(), id: doc.id })));
-            }), []
-        })
+            })
+            return () => unsub()
+        }, [])
 
     const chosenCourse = (event: any) => {
         setCourseName(event.target.value)

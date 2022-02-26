@@ -6,6 +6,7 @@ import ImageSlider from "../components/ImageSlider";
 import SingleCourse from "../components/singleCourse"
 import Rating from "../components/rating/rating";
 import { useAuth } from "../components/login";
+import Comments from "../components/comments/Comments";
 
 type Props={
   route: ReactNode;
@@ -24,6 +25,7 @@ const Course: NextPage<Props> = () => {
     <>
       <TopBar />
       <SingleCourse courseId={courseId}/>
+      {courseId && <Comments courseId={courseId}/>}
       {user && <Rating courseId={courseId}/>}
       <ImageSlider courseId={courseId} />
     </>

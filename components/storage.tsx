@@ -1,7 +1,6 @@
 import { ref, uploadBytesResumable, getDownloadURL } from "@firebase/storage";
-import { storage } from "../firebase/firebase";
+import { storage, db } from "../firebase/firebase";
 import { addDoc, collection } from "@firebase/firestore";
-import { db } from "../firebase/firebase";
 
 const saveStorage = (file: any, folderName: string, photoDesc: string) => {
         const storageRef = ref(storage, file.name);
@@ -22,11 +21,10 @@ const saveStorage = (file: any, folderName: string, photoDesc: string) => {
                 }
             },
             () => {
-                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    console.log('File available at', downloadURL);
+                getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                    console.log('File available at', url);
                     addDoc(collection(db, folderName), {
-                        url: downloadURL,
-                        photoDesc: photoDesc
+                        url, photoDesc
                     });
                 });
                
