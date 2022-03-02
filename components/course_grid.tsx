@@ -134,7 +134,7 @@ const Courses: React.FC = () => {
                 }).map((course: DocumentData) => (
                     <>
                         {regionFilter == course.region || regionFilter == "" ? (
-                            <Link href="/[course]" as={`/${course.id}`}>
+                            <Link href="/[course]" as={`/${course.id}`} key={course.id}>
                                 <StyledCourse>
                                     <IMG src={course.img} alt={course.name} />
                                     <H1>{course.name}</H1>

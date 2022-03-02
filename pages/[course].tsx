@@ -4,18 +4,26 @@ import { useEffect, useState, ReactNode } from "react";
 import TopBar from "../components/topbar";
 import ImageSlider from "../components/ImageSlider";
 import SingleCourse from "../components/singleCourse"
-import Rating from "../components/rating/rating";
-import { useAuth } from "../components/login";
 import Comments from "../components/comments/Comments";
+import styled from "styled-components"
 
-type Props={
+const Left = styled.div`
+  width: 70%;
+  float: left;
+`
+const Right = styled.div`
+  float: left;
+  width: 28%;
+  margin-left: 1%;
+`
+type Props = {
   route: ReactNode;
 }
 
 const Course: NextPage<Props> = () => {
   const router = useRouter();
   const [courseId, setCourseId] = useState<string | string[] | undefined>();
-  const {user} = useAuth();
+  
   useEffect(
     () => {
       setCourseId(router.query.course)
@@ -24,15 +32,18 @@ const Course: NextPage<Props> = () => {
   return (
     <>
       <TopBar />
-      <SingleCourse courseId={courseId}/>
-      {courseId && <Comments courseId={courseId}/>}
-      {user && <Rating courseId={courseId}/>}
-      <ImageSlider courseId={courseId} />
+      <Left>
+        <SingleCourse courseId={courseId} />
+        <ImageSlider courseId={courseId} />
+      </Left>
+      <Right>
+        {courseId && <Comments courseId={courseId} />}
+      </Right>
     </>
   )
 }
 
-Course.getInitialProps = ({query: route}) => {
+Course.getInitialProps = ({ query: route }) => {
   return route as Props
 }
 

@@ -1,5 +1,5 @@
 import { ref, uploadBytesResumable, getDownloadURL } from "@firebase/storage";
-import { storage, db } from "../firebase/firebase";
+import { storage, db } from "../../firebase/firebase";
 import { addDoc, collection } from "@firebase/firestore";
 
 const saveStorage = (file: any, folderName: string, photoDesc: string) => {

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { db } from "../firebase/firebase";
+import { db } from "../../firebase/firebase";
 import { collection, DocumentData, onSnapshot } from "firebase/firestore";
-import saveStorage from "../components/storage";
+import saveStorage from "./storage";
 import styled from "styled-components";
 import Popup from "reactjs-popup";
-import { MenuButton } from "./topbar";
+import { MenuButton } from "../topbar";
 
 const Form = styled.form`
     display: flex;

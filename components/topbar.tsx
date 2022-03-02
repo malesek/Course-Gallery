@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react'
 import styled from 'styled-components'
-import AddPhotos from './addPhotos';
+import AddPhotos from './photos/addPhotos';
 import { useAuth } from './login';
 
 const TopBarWrap = styled.header`

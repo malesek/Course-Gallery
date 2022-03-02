@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { collection, onSnapshot, DocumentData } from "firebase/firestore"
-import {db} from "../firebase/firebase"
+import {db} from "../../firebase/firebase"
 import { useEffect, useState } from 'react'
 import { updateDoc, doc } from "@firebase/firestore";
 
