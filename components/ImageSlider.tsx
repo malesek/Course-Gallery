@@ -11,6 +11,14 @@ position: relative;
   justify-content: center;
   align-items:center;
   margin-top: 80px;
+  @media only screen and (max-width:768px) {
+      margin: 10px 0 10px 0;
+      height: 62vh;
+    }
+    @media only screen and (max-width:1000px) {
+      margin: 80px 0 80px 0;
+      height: 62vh;
+    }
 `
 
 const IMG = styled.img`
@@ -19,6 +27,15 @@ const IMG = styled.img`
   padding:0;
   margin:0;
   border-radius: 10px;
+  @media only screen and (max-width:480px) {
+        max-width: 98%;
+    }
+    @media only screen and (max-width:768px) {
+        max-width: 93%;
+    }
+    @media only screen and (max-width:1000px) {
+        max-width: 92%;
+    }
   `
 
 const LeftArrow = styled(FaArrowAltCircleLeft)`
@@ -55,9 +72,8 @@ const PhotoDesc = styled.p`
 
 const ImageDiv = styled.div`
     position:relative;
-    width:1000px;
-    height:600px;
     display:flex;
+    width: 1000px;
     justify-content:center;
     align-items:center;
 `
@@ -107,10 +123,10 @@ const ImageSlider: React.FC<Props> = ({ courseId }) => {
                 return (
                     <>
                         {index == current &&
-                            <ImageDiv>
-                                <IMG src={image.url} alt={image.url} key={image.url} />
+                            <ImageDiv key="slider">
+                                <IMG src={image.url} alt={image.url} />
                                 {image.photoDesc &&
-                                    <DescSpan>
+                                    <DescSpan key={image.photoDesc}>
                                         <PhotoDesc>
                                             {image.photoDesc}
                                         </PhotoDesc>

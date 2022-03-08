@@ -14,6 +14,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "firebase/firebase.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx","**/*.jsx", "firebase/firebase.ts"],
   "exclude": ["node_modules"]
 }

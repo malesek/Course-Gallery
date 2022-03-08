@@ -10,6 +10,9 @@ padding: 12px 12px;
 align-items: center;
 background-color: #000555;
 height: 5%;
+@media only screen and (max-width:580px) {
+        flex-direction: column;
+    }
 `;
 
 const CourseGallery = styled.h2`
@@ -18,16 +21,29 @@ color: white;
 padding: 0;
 margin: 0;
 font-size: 35px;
+    @media only screen and (max-width:580px) {
+        font-size: 30px;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+    @media only screen and (max-width:768px) {
+        font-size: 30px;
+    }
 `;
 
 const Buttons = styled.div`
 display: flex;
 flex-direction: row;
+justify-content: space-between;
 margin-left: auto;
+@media only screen and (max-width:580px) {
+    margin-left: unset;
+}
 `;
 
 const MenuButton = styled.div`
     font-size: 25px;
+    float: right;
     cursor: pointer;
     color: #ffffff;
     margin: auto 7px;
@@ -35,6 +51,12 @@ const MenuButton = styled.div`
     height:100%;
     &:hover{
         background-color: #000666;
+    }
+    @media only screen and (max-width:580px) {
+        font-size: 15px;
+    }
+    @media only screen and (max-width:768px) {
+        font-size: 20px;
     }
 `;
 

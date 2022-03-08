@@ -11,9 +11,18 @@ type Props = {
     courseId: string | string[] | undefined
 }
 
+const Stars = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+`
+
 const Star = styled(FaStar)`
     font-size: 20px;
     margin-top: 48px;
+    @media only screen and (max-width:480px) {
+        margin-top: 14px;
+    }
 `
 
 const Rating: React.FC<Props> = ({courseId}) => {  
@@ -43,7 +52,7 @@ const Rating: React.FC<Props> = ({courseId}) => {
     };
 
     return(
-        <>
+        <Stars>
         {[...Array(5)].map((_, index) => {
             return(
             <Star 
@@ -54,7 +63,7 @@ const Rating: React.FC<Props> = ({courseId}) => {
             onMouseLeave={() => setHoverStars(0)}
             />)
         })}
-        </>
+        </Stars>
     )
 }
 

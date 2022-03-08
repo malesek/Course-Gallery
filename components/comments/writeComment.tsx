@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useAuth } from "../login";
 import saveComment from "./saveComment";
 import styled from "styled-components"
+import { Timestamp } from "firebase/firestore";
 
 const TextInput = styled.input`
     margin:auto;
@@ -19,18 +20,16 @@ type Props = {
 
 const WriteComment: React.FC<Props> = ({courseId}) => {
 const [commContent, setCommContent] = useState("");
-const [inputVal, setInputVal] = useState<string>();
 const {user} = useAuth();
 
 const handleClick = () => {
-    setInputVal("");
-    if(commContent) saveComment(user?.uid, user?.displayName, commContent, courseId);
+    if(commContent) saveComment(user?.uid, user?.displayName, commContent, courseId, Timestamp.now());
     setCommContent("");
 }
 
 return(
     <>
-    <TextInput type="text" value={inputVal} onChange={(event) => setCommContent(event.target.value)}/>
+    <TextInput type="text" onChange={(event) => setCommContent(event.target.value)}/>
     <button onClick={() => handleClick()}>Odeslat</button>
     </>
 )

@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import Courses from '../components/course_grid'
+import Courses from '../components/courses/course_grid'
 import TopBar from '../components/topbar'
 
 const Home: NextPage = () => {

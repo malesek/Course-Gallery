@@ -1,20 +1,25 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
-import { collection, onSnapshot, DocumentData, Unsubscribe } from "firebase/firestore"
-import { db } from "../firebase/firebase"
+import { collection, onSnapshot, DocumentData, getDoc, doc} from "firebase/firestore"
+import { db } from "../../firebase/firebase"
 import { useEffect, useState } from 'react'
 import Map from "./map";
+import { useAuth } from "../login";
+import Favourites from "./favourites";
 
 
 const StyledCourse = styled.div`
     margin-right: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #000555;
     float: left;
-    width: 302px;
+    width: 320px;
     cursor: pointer;
+    border-radius: 10px; 
+    padding: 0;
+    vertical-align: middle;
     &:hover {
-        border: 1px solid #777;
+        border: 1px solid #000666;
     }
 `;
 
@@ -31,9 +36,11 @@ const Desc = styled.div`
 `;
 
 const IMG = styled.img`
-    width: 290px;
+    max-width: 98%;
     height: 150px;
-    margin: 5px 5px 0 5px;
+    display: block;
+    margin: 1% auto 0 auto;
+    border-radius: 10px;
 `
 
 const Filters = styled.div`
@@ -50,11 +57,11 @@ margin: 10px auto 10px auto;
 `;
 
 const List = styled.div`
+display: block;
+align-items: center;
 margin: 10px auto 10px auto;
 width:80%;
 padding:0;
-display: flex;
-justify-content: center;
 `;
 
 const Input = styled.input`
@@ -87,19 +94,45 @@ const Line = styled.hr`
     border-radius: 5px;
 `
 
+
+
 const Courses: React.FC = () => {
 
     const [data, setData] = useState<DocumentData>([]);
     const [searchCourse, setSearchCourse] = useState("");
     const [regionFilter, setRegionFilter] = useState<string>("");
+    const [favourites, setFavourites] = useState<DocumentData>();
+    const [favData, setFavData] = useState<DocumentData>();
+    const [favFilter, setFavFilter] = useState(true);
+    const {user} = useAuth();
+    const uid = user?.uid;
 
     useEffect(
         () => {
             const unsub = onSnapshot(collection(db, "courses"), (snap) => {
                 setData(snap.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+                setFavData(snap.docs.map(doc => ({ ...doc.data(), id: doc.id })));
             })
-            return () => unsub()
-        }, [])
+            if(uid){
+                onSnapshot(doc(db, `favourites`, uid), (doc) => {
+                    setFavourites(doc.data())
+                })
+            }
+            return () => {unsub()}
+        }, [uid]
+    )
+
+    const handleFilterClick = () => {
+        if(favFilter) {
+            setFavData(data.filter((x:DocumentData) => {if(x.id == favourites?.[x.id]) return x}));
+            setFavFilter(false)
+        }
+        else {
+            setFavData(data)
+            setFavFilter(true)
+        }
+    }
+
     return (
         <>
             <Mapa>
@@ -110,38 +143,42 @@ const Courses: React.FC = () => {
 
             <Filters>
                 <div>
-                    <Input type="text" placeholder="Hledat" onChange={(event) => { setSearchCourse(event.target.value) }} />
+                    <Input type="text" placeholder="Hledat" onChange={(event) => setSearchCourse(event.target.value)} />
                 </div>
                 <div>
-                    <Select onChange={(event: any) => { setRegionFilter(event.target.value) }}>
+                    <Button onClick={() => { handleFilterClick()}}>Oblíbené</Button>
+                </div>
+                <div>
+                    <Select onChange={(event: any) => setRegionFilter(event.target.value)}>
                         <option value={""}></option>
                         <option value={"Královehradecký kraj"}>Královehradecký kraj</option>
                         <option value={"Pardubický kraj"}>Pardubický kraj</option>
                     </Select>
-                    <Button onClick={() => {
-                        setRegionFilter("");
-                    }}>Vymazat filtr</Button>
+                    <Button onClick={() => setRegionFilter("")}>Vymazat filtr</Button>
                 </div>
             </Filters>
 
             <Line />
 
-
             <List>
-                {data.filter((value: any) => {
+                {favData && favData.filter((value: any) => {
                     if (searchCourse == "") return value
                     else if (value.name.toLowerCase().includes(searchCourse.toLowerCase())) return value
                 }).map((course: DocumentData) => (
                     <>
-                        {regionFilter == course.region || regionFilter == "" ? (
-                            <Link href="/[course]" as={`/${course.id}`} key={course.id}>
-                                <StyledCourse>
-                                    <IMG src={course.img} alt={course.name} />
-                                    <H1>{course.name}</H1>
-                                    <Desc>{course.place}</Desc>
-                                    <Desc>{course.holes} jamek</Desc>
-                                </StyledCourse>
-                            </Link>) : (<></>)}
+                        {regionFilter == course.region || regionFilter == "" &&
+                                <StyledCourse key={course.id}>
+                                {user && <Favourites uid={user.uid} courseId={course.id}/>}
+                                <Link href="/[course]" as={`/${course.id}`} key={course.id}>
+                                    <>
+                                        <IMG src={course.img} alt={course.name} />
+                                        <H1>{course.name}</H1>
+                                        <Desc>{course.place}</Desc>
+                                        <Desc>{course.holes} jamek</Desc>
+                                    </>
+                                </Link>
+                            </StyledCourse>
+                        }
                     </>
                 ))}
             </List>
