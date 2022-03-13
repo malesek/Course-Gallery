@@ -1,23 +1,23 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
-import { collection, onSnapshot, DocumentData, getDoc, doc} from "firebase/firestore"
+import { collection, onSnapshot, DocumentData, getDocs, doc, query} from "firebase/firestore"
 import { db } from "../../firebase/firebase"
 import { useEffect, useState } from 'react'
 import Map from "./map";
 import { useAuth } from "../login";
 import Favourites from "./favourites";
+import AvgRating from "./avgRating";
 
 
 const StyledCourse = styled.div`
-    margin-right: 10px;
+    margin: 5px auto 5px auto;
     border: 1px solid #000555;
     float: left;
     width: 320px;
     cursor: pointer;
     border-radius: 10px; 
     padding: 0;
-    vertical-align: middle;
     &:hover {
         border: 1px solid #000666;
     }
@@ -57,11 +57,14 @@ margin: 10px auto 10px auto;
 `;
 
 const List = styled.div`
-display: block;
-align-items: center;
+display: flex;
+justify-content: center;
 margin: 10px auto 10px auto;
 width:80%;
 padding:0;
+    @media only screen and (max-width:1670px) {
+        display:block;
+    }
 `;
 
 const Input = styled.input`
@@ -118,10 +121,12 @@ const Courses: React.FC = () => {
                     setFavourites(doc.data())
                 })
             }
-            return () => {unsub()}
+
+            return () => unsub()
         }, [uid]
     )
-
+    
+    
     const handleFilterClick = () => {
         if(favFilter) {
             setFavData(data.filter((x:DocumentData) => {if(x.id == favourites?.[x.id]) return x}));
@@ -165,9 +170,9 @@ const Courses: React.FC = () => {
                     if (searchCourse == "") return value
                     else if (value.name.toLowerCase().includes(searchCourse.toLowerCase())) return value
                 }).map((course: DocumentData) => (
-                    <>
+                    <React.Fragment key={course.id}>
                         {regionFilter == course.region || regionFilter == "" &&
-                                <StyledCourse key={course.id}>
+                            <StyledCourse>
                                 {user && <Favourites uid={user.uid} courseId={course.id}/>}
                                 <Link href="/[course]" as={`/${course.id}`} key={course.id}>
                                     <>
@@ -175,11 +180,12 @@ const Courses: React.FC = () => {
                                         <H1>{course.name}</H1>
                                         <Desc>{course.place}</Desc>
                                         <Desc>{course.holes} jamek</Desc>
+                                        <AvgRating courseId={course.id}/>
                                     </>
                                 </Link>
                             </StyledCourse>
                         }
-                    </>
+                    </React.Fragment>
                 ))}
             </List>
 

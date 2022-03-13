@@ -15,7 +15,7 @@ const Admin: NextPage = () => {
 
   useEffect(() => {
     if(id !== admin) router.push("/")
-  }, [])
+  }, [id, router])
   
   return (
     <>

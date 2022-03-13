@@ -63,6 +63,7 @@ const Map: React.FC = () => {
         <Marker
           position={{ lat: course.lat, lng: course.lng }}
           onClick={() => { setSelCourse(course), setPickedCourse(true) }}
+          key={course.id}
         />
       ))}
       {pickedCourse && (

@@ -67,7 +67,7 @@ const TopBar: React.FC = () => {
     const { user, login, logout } = useAuth();
     return (
         <TopBarWrap>
-            <Link href="/">
+            <Link href="/" passHref>
                 <CourseGallery>
                     Galerie Hřišť
                 </CourseGallery>
@@ -83,7 +83,7 @@ const TopBar: React.FC = () => {
                 ) : (
                     <>
                     {user.uid === admin &&
-                        <Link href="/admin">
+                        <Link href="/admin" passHref>
                             <MenuButton>
                                 Admin
                             </MenuButton>

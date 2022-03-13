@@ -42,9 +42,8 @@ const Course: NextPage<Props> = () => {
   
   useEffect(
     () => {
-      setCourseId(router.query.course)
-        , [router]
-    })
+      setCourseId(router.query.course) 
+    }, [router])
   return (
     <>
       <TopBar />

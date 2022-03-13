@@ -23,7 +23,7 @@ const Favourites: React.FC<Props> = ({uid, courseId}) => {
         () => {
             dbQuery()
             return() => {dbQuery()}
-        }, []
+        }
     )
 
     const dbQuery = async () => {

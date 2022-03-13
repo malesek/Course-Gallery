@@ -57,7 +57,7 @@ const Comments: React.FC<Props> = ({ courseId }) => {
             const comments = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
             setComms(comments)
         })
-    }, [])
+    })
 
     return (
         <CommsDiv>

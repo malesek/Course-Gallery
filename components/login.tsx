@@ -24,7 +24,7 @@ const AuthProvider: React.FC = ({children}) => {
       else setUser(null);
     });
     return unsubscribe;
-  }, [])
+  })
 
   const login = async () => {
     try{

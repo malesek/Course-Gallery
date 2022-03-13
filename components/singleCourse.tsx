@@ -63,7 +63,7 @@ type Props = {
 
 const SingleCourse: React.FC<Props> = ({ courseId }) => {
 
-    const [course, setCourse] = useState<DocumentData>([]);
+    const [course, setCourse] = useState<DocumentData>();
     const { user } = useAuth();
 
     useEffect(() => {

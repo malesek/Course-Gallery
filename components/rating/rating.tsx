@@ -1,10 +1,10 @@
 import { useState } from "react";
-import {FaStar} from "react-icons/fa"
+import {FaStar} from "react-icons/fa";
 import saveRating from "./saveRating";
-import { useAuth } from "../login"
+import { useAuth } from "../login";
 import { useEffect } from "react";
-import {query, collection, where, getDocs} from "firebase/firestore"
-import {db} from "../../firebase/firebase"
+import {query, collection, where, getDocs} from "firebase/firestore";
+import {db} from "../../firebase/firebase";
 import styled from "styled-components";
 
 type Props = {
@@ -35,7 +35,7 @@ const Rating: React.FC<Props> = ({courseId}) => {
             dbQuery()
             return () => {dbQuery()}
         }
-    },[])
+    })
 
     const dbQuery = async () => {
         const q = query(collection(db, `rating`), where("courseId", "==", courseId), where("uid", "==", user?.uid));
