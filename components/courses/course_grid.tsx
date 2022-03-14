@@ -11,7 +11,7 @@ import AvgRating from "./avgRating";
 
 
 const StyledCourse = styled.div`
-    margin: 5px auto 5px auto;
+    margin: 5px;
     border: 1px solid #000555;
     float: left;
     width: 320px;
