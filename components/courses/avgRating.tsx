@@ -26,8 +26,8 @@ const AvgRating: React.FC<Props> = ({courseId}) => {
 
     useEffect(() => {
         dbQuery()
-        return () => {dbQuery()}
-    })
+        return () => {setStarsData([])}
+    }, [])
 
     const dbQuery = async () => {
         const q = query(collection(db, `rating`), where("courseId", "==", courseId));

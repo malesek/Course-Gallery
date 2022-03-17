@@ -171,20 +171,24 @@ const Courses: React.FC = () => {
                     else if (value.name.toLowerCase().includes(searchCourse.toLowerCase())) return value
                 }).map((course: DocumentData) => (
                     <React.Fragment key={course.id}>
+                        
                         {regionFilter == course.region || regionFilter == "" &&
+                        
                             <StyledCourse>
+                                
                                 {user && <Favourites uid={user.uid} courseId={course.id}/>}
                                 <Link href="/[course]" as={`/${course.id}`} key={course.id}>
-                                    <>
+                                    <div>
                                         <IMG src={course.img} alt={course.name} />
                                         <H1>{course.name}</H1>
                                         <Desc>{course.place}</Desc>
                                         <Desc>{course.holes} jamek</Desc>
                                         <AvgRating courseId={course.id}/>
-                                    </>
-                                </Link>
+                                    </div>
+                                    </Link>
                             </StyledCourse>
                         }
+                        
                     </React.Fragment>
                 ))}
             </List>

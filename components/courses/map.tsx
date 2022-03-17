@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { onSnapshot, collection, DocumentData } from '@firebase/firestore'
+import { onSnapshot, collection, DocumentData, query, getDocs } from '@firebase/firestore'
 import { db } from '../../firebase/firebase'
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api'
 import styled from 'styled-components'
@@ -36,17 +36,21 @@ const center = { lat: 50.190841, lng: 15.668542 };
 
 const Map: React.FC = () => {
 
-  const [data, setData] = useState<DocumentData>([]);
+  const [data, setData] = useState<DocumentData>();
   const [selCourse, setSelCourse] = useState<DocumentData>([]);
   const [pickedCourse, setPickedCourse] = useState(false);
 
   useEffect(
     () => {
-      const unsub = onSnapshot(collection(db, "courses"), (snap) => {
-        setData(snap.docs.map(doc => ({ ...doc.data(), id: doc.id })));
-      })
-      return () => unsub()
-    })
+      dbQuery()
+      return () => {setData([])}
+    }, [])
+    const dbQuery = async () => {
+      const q = query(collection(db, "courses"));
+      const querySnapshot = await getDocs(q);
+      const data = querySnapshot.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }))
+      setData(data)
+  }
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyArT-SuoiFIleiipD0YhiLlwobTFuUFf_o",
   });
@@ -59,7 +63,7 @@ const Map: React.FC = () => {
       zoom={10}
       center={center}
     >
-      {data.map((course: DocumentData) => (
+      {data?.map((course: DocumentData) => (
         <Marker
           position={{ lat: course.lat, lng: course.lng }}
           onClick={() => { setSelCourse(course), setPickedCourse(true) }}

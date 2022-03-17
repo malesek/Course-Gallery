@@ -33,9 +33,9 @@ const Rating: React.FC<Props> = ({courseId}) => {
     useEffect(() => {
         if(user && courseId){
             dbQuery()
-            return () => {dbQuery()}
+            return () => {setStars(0)}
         }
-    })
+    }, [])
 
     const dbQuery = async () => {
         const q = query(collection(db, `rating`), where("courseId", "==", courseId), where("uid", "==", user?.uid));

@@ -98,8 +98,8 @@ const ImageSlider: React.FC<Props> = ({ courseId }) => {
     const [current, setCurrent] = useState(0);
     useEffect(() => {
         dbQuery()
-        return () => {dbQuery()}
-    })
+        return () => {setImgData([])}
+    }, [])
 
     const dbQuery = async () => {
         const q = query(collection(db, `${courseId}`), where("validate", "==", true));

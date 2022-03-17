@@ -90,7 +90,7 @@ const Div = styled.div`
     border: 2px solid #000555;
     `
 const FileName = styled.p`
-    color: #fff;
+    color: #000;
     text-align: center;
     padding:0;
     margin:0;`
@@ -131,7 +131,6 @@ const AddPhotos: React.FC = () => {
             setFile(selected);
         }
     }
-
     const useClick = (event: any) => {
         event.preventDefault()
         saveStorage(file, courseName, photoDesc)

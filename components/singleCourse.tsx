@@ -91,7 +91,6 @@ const SingleCourse: React.FC<Props> = ({ courseId }) => {
                         <StWeather>
                         {courseId && <Weather lat={course.lat} lng={course.lng} name={course.place}/>}
                         </StWeather>
-                        
                     </Bottom>
                 </>
             }
