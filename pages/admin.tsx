@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 const admin = "AxKCMrGftgM1uYueydTRgwqHmv83";
+const admin2 = "2bbacSDMZYSipFyzF9dafvn7lTH2";
 
 const Admin: NextPage = () => {
 
@@ -15,6 +16,7 @@ const Admin: NextPage = () => {
 
   useEffect(() => {
     if(id !== admin) router.push("/")
+    if(id !== admin2) router.push("/")
   }, [id, router])
   
   return (

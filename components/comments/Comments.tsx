@@ -43,6 +43,9 @@ type Props = {
     courseId: string | string[]
 }
 
+const admin1 = "AxKCMrGftgM1uYueydTRgwqHmv83";
+const admin2 = "2bbacSDMZYSipFyzF9dafvn7lTH2"
+
 const Comments: React.FC<Props> = ({ courseId }) => {
 
     const [comms, setComms] = useState<DocumentData>([]);
@@ -69,7 +72,7 @@ const Comments: React.FC<Props> = ({ courseId }) => {
                     <Comm key={comment.comment}>
                         <h4>{comment.name}</h4>
                         <p>{comment.comment}</p>
-                        {user?.uid == comment.uid && (now - createdAt) < oneDay &&
+                        {(user?.uid == admin1 || user?.uid == admin2 || user?.uid == comment.uid) && (now - createdAt) < oneDay &&
                             <Trash
                                 onClick={() => deleteComment(comment.id)}
                             />

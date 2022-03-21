@@ -96,7 +96,7 @@ const ValidatePhoto: React.FC = () => {
         <h1>Golf Resort Kunětická Hora</h1>
         <PhotosDiv>
         {gckhData.map((image: DocumentData) => (
-            <>
+            <React.Fragment key={image.id}>
             {!image.validate && !image.nonusable ?
                 (
                     <StyledCourse>
@@ -112,10 +112,11 @@ const ValidatePhoto: React.FC = () => {
                                 Povolit
                             </AcceptButton>
                             <DenyButton
-                            onClick={() =>
+                            onClick={() =>{
+                                console.log("ahoj");
                                 updateDoc(doc(db, `gckh`, image.id), {
                                     nonusable: true
-                                })
+                                })}
                             }>
                                 Zakázat
                             </DenyButton>
@@ -123,7 +124,7 @@ const ValidatePhoto: React.FC = () => {
                     </StyledCourse>
                 ) : (<></>)
             }
-            </>
+            </React.Fragment>
         ))}
         </PhotosDiv>
         </CourseDiv>
@@ -131,7 +132,7 @@ const ValidatePhoto: React.FC = () => {
         <h1>Park Golf Hradec Králové</h1>
         <PhotosDiv>
         {gchkData.map((image: DocumentData) => (
-            <>
+            <React.Fragment key={image.id}>
             {!image.validate && !image.nonusable ?
                 (
                     <StyledCourse>
@@ -158,14 +159,14 @@ const ValidatePhoto: React.FC = () => {
                     </StyledCourse>
                 ) : (<></>)
             }
-            </>
+            </React.Fragment>
         ))}
         </PhotosDiv>
         </CourseDiv>
         <CourseDiv>
         <h1>Golf Resort Lázně Bohdaneč</h1>
         {grlbData.map((image: DocumentData) => (
-            <>
+            <React.Fragment key={image.id}>
             {!image.validate && !image.nonusable ?
                 (
                     <StyledCourse>
@@ -192,13 +193,13 @@ const ValidatePhoto: React.FC = () => {
                     </StyledCourse>
                 ) : (<></>)
             }
-            </>
+            </React.Fragment>
         ))}
         </CourseDiv>
         <CourseDiv>
         <h1>Queens Park Golf Club Myštěves</h1>
         {qpgcmData.map((image: DocumentData) => (
-            <>
+            <React.Fragment key={image.id}>
             {!image.validate && !image.nonusable ?
                 (
                     <StyledCourse>
@@ -225,7 +226,7 @@ const ValidatePhoto: React.FC = () => {
                     </StyledCourse>
                 ) : (<></>)
             }
-            </>
+            </React.Fragment>
         ))}
         </CourseDiv>
         </>
