@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { useEffect, useState } from "react"
-import { onSnapshot, collection, DocumentData } from "@firebase/firestore"
+import { onSnapshot, collection, DocumentData, doc, getDoc } from "@firebase/firestore"
 import { db } from "../firebase/firebase"
 import Rating from "../components/rating/rating";
 import { useAuth } from "../components/login";
@@ -67,13 +67,15 @@ const SingleCourse: React.FC<Props> = ({ courseId }) => {
     const { user } = useAuth();
 
     useEffect(() => {
-        const unsub = onSnapshot(collection(db, `courses`), (snap) => {
-            const courses = snap.docs.map(doc => ({ ...doc.data(), id: doc.id }))
-            const oneCourse = courses.find(x => x.id === courseId)
-            setCourse(oneCourse);
-        })
-        return () => unsub()
-    })
+        dbQuery()
+    }, [courseId])
+
+    const dbQuery = async () => {
+        const docRef = doc(db, 'courses', `${courseId}`)
+        const docSnap = await getDoc(docRef)
+        setCourse(docSnap.data())
+    }
+
     return (
         <>
             {course &&
