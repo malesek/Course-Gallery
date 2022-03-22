@@ -151,14 +151,6 @@ const Courses: React.FC = () => {
                 <div>
                     <Button onClick={() => { handleFilterClick()}}>Oblíbené</Button>
                 </div>
-                <div>
-                    <Select onChange={(event: any) => setRegionFilter(event.target.value)}>
-                        <option value={""}></option>
-                        <option value={"Královehradecký kraj"}>Královehradecký kraj</option>
-                        <option value={"Pardubický kraj"}>Pardubický kraj</option>
-                    </Select>
-                    <Button onClick={() => setRegionFilter("")}>Vymazat filtr</Button>
-                </div>
             </Filters>
 
             <Line />
@@ -169,9 +161,6 @@ const Courses: React.FC = () => {
                     else if (value.name.toLowerCase().includes(searchCourse.toLowerCase())) return value
                 }).map((course: DocumentData) => (
                     <React.Fragment key={course.id}>
-                        
-                        {regionFilter == course.region || regionFilter == "" &&
-                        
                             <StyledCourse>
                                 
                                 {user && <Favourites uid={user.uid} courseId={course.id}/>}
@@ -185,8 +174,6 @@ const Courses: React.FC = () => {
                                     </div>
                                     </Link>
                             </StyledCourse>
-                        }
-                        
                     </React.Fragment>
                 ))}
             </List>
