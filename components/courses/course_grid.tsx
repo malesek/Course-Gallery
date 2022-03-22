@@ -57,8 +57,6 @@ margin: 10px auto 10px auto;
 `;
 
 const List = styled.div`
-display: flex;
-justify-content: center;
 margin: 10px auto 10px auto;
 width:80%;
 padding:0;

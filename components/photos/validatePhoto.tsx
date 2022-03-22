@@ -86,8 +86,8 @@ const ValidatePhoto: React.FC = () => {
             onSnapshot(collection(db, `qpgcm`), (snap) => {
                 const images = snap.docs.map(doc => ({...doc.data(), id:doc.id}))
                 setQpgcmData(images)
-            }), []
-        })
+            })
+        }, [])
 
 
     return (
