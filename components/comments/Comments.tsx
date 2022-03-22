@@ -72,10 +72,10 @@ const Comments: React.FC<Props> = ({ courseId }) => {
                     <Comm key={comment.comment}>
                         <h4>{comment.name}</h4>
                         <p>{comment.comment}</p>
-                        {(user?.uid == admin1 || user?.uid == admin2) || (user?.uid == comment.uid && (now - createdAt) < oneDay) &&
+                        {user?.uid == admin1 || user?.uid == admin2 || (user?.uid == comment.uid && (now - createdAt) < oneDay) ?(
                             <Trash
                                 onClick={() => deleteComment(comment.id)}
-                            />
+                            />) : (<></>)
                         }
                         <Line />
                     </Comm>)
