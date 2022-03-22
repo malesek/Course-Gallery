@@ -13,13 +13,17 @@ import AvgRating from "./avgRating";
 const StyledCourse = styled.div`
     margin: 5px;
     border: 1px solid #000555;
+    border-radius: 10px; 
     float: left;
     width: 320px;
     cursor: pointer;
-    border-radius: 10px; 
     padding: 0;
     &:hover {
         border: 1px solid #000666;
+    }
+    @media only screen and (max-width:768px) {
+      margin: auto;
+      margin-bottom: 5px;
     }
 `;
 
