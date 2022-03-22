@@ -21,8 +21,9 @@ const StyledCourse = styled.div`
     &:hover {
         border: 1px solid #000666;
     }
-    @media only screen and (max-width:768px) {
+    @media only screen and (max-width:659px) {
       margin: auto auto 5px 10%;
+      width: 80%;
     }
 `;
 
