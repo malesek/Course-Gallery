@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/dist/client/router";
 import { useEffect, useState, ReactNode } from "react";
 import TopBar from "../components/topbar";
-import ImageSlider from "../components/ImageSlider";
+import ImageSlider from "../components/photos/ImageSlider";
 import SingleCourse from "../components/singleCourse"
 import Comments from "../components/comments/Comments";
 import styled from "styled-components"

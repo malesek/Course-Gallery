@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { collection, DocumentData, query, getDocs, where } from "@firebase/firestore"
-import { db } from "../firebase/firebase";
+import { db } from "../../firebase/firebase";
 import {FaArrowAltCircleRight, FaArrowAltCircleLeft} from "react-icons/fa"
 import styled from "styled-components"
 
@@ -10,7 +10,7 @@ position: relative;
   display: flex;
   justify-content: center;
   align-items:center;
-  margin-top: 80px;
+  margin: 80px 0 20px 20px;
   @media only screen and (max-width:768px) {
       margin: 10px 0 10px 0;
       height: 62vh;
@@ -74,6 +74,7 @@ const ImageDiv = styled.div`
     position:relative;
     display:flex;
     width: 1000px;
+    height: 70vh;
     justify-content:center;
     align-items:center;
 `
@@ -99,8 +100,8 @@ const ImageSlider: React.FC<Props> = ({ courseId }) => {
     useEffect(() => {
         dbQuery()
         return () => {setImgData([])}
-    }, [])
-
+    }, [courseId])
+    console.log(imgData)
     const dbQuery = async () => {
         const q = query(collection(db, `${courseId}`), where("validate", "==", true));
         const querySnapshot = await getDocs(q);

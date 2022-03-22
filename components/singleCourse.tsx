@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { useEffect, useState } from "react"
-import { onSnapshot, collection, DocumentData, doc, getDoc } from "@firebase/firestore"
+import { DocumentData, doc, getDoc } from "@firebase/firestore"
 import { db } from "../firebase/firebase"
 import Rating from "../components/rating/rating";
 import { useAuth } from "../components/login";

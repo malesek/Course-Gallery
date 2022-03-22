@@ -113,7 +113,6 @@ const ValidatePhoto: React.FC = () => {
                             </AcceptButton>
                             <DenyButton
                             onClick={() =>{
-                                console.log("ahoj");
                                 updateDoc(doc(db, `gckh`, image.id), {
                                     nonusable: true
                                 })}

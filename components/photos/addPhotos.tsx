@@ -83,7 +83,7 @@ const Option = styled.option`
     padding: 0px 2px 1px;
     `
 const Div = styled.div`
-    background-color: #00ffff;
+    background-color: #f9f9ee;
     width: 300px;
     padding: 20px;
     border-radius: 25px;
@@ -93,7 +93,9 @@ const FileName = styled.p`
     color: #000;
     text-align: center;
     padding:0;
-    margin:0;`
+    margin:0;
+    word-wrap: break-word;
+    `
 const TextInput = styled.input`
     margin:auto;
     text-align:center;
@@ -147,13 +149,13 @@ const AddPhotos: React.FC = () => {
                     </Select>
 
                     <FileInput type="file" id="file" onChange={changeHandler} accept="image/*"/>
-                    <FileLabel htmlFor="file">Vyberte Soubor</FileLabel>
+                    <FileLabel htmlFor="file">Vybrat Fotografii</FileLabel>
                     <FileName>{fileName}</FileName>
 
-                    <TextInput type="text" onChange={(event) => setPhotoDesc(event.target.value)} />
+                    <TextInput type="text" placeholder="Napište popisek..." onChange={(event) => setPhotoDesc(event.target.value)} />
 
                     <ButtonGradient>
-                        <Submit type="submit">Upload</Submit>
+                        <Submit type="submit">Nahrát</Submit>
                     </ButtonGradient>
                 </Form>
             </Div>
