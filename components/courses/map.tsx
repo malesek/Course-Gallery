@@ -52,7 +52,7 @@ const Map: React.FC = () => {
       setData(data)
   }
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyArT-SuoiFIleiipD0YhiLlwobTFuUFf_o",
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
   });
 
   if (!isLoaded) return <h1>Loading Map</h1>;
