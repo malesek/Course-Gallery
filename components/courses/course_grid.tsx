@@ -22,8 +22,7 @@ const StyledCourse = styled.div`
         border: 1px solid #000666;
     }
     @media only screen and (max-width:768px) {
-      margin: auto;
-      margin-bottom: 5px;
+      margin: auto auto 5px 10%;
     }
 `;
 
@@ -50,7 +49,7 @@ const IMG = styled.img`
 const Filters = styled.div`
     display:flex;
     justify-content:space-around;
-    margin: 10px auto 10px auto;
+    margin: 10px auto 10px auto; 
 `
 
 const Mapa = styled.div`
@@ -64,8 +63,9 @@ const List = styled.div`
 margin: 10px auto 10px auto;
 width:80%;
 padding:0;
-    @media only screen and (max-width:1670px) {
-        display:block;
+    @media only screen and (max-width:768px) {
+        width: 100%;
+        margin: auto;
     }
 `;
 
