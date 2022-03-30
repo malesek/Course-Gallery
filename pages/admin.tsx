@@ -16,7 +16,22 @@ const Admin: NextPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if(id !== (admin3 || admin || admin2)) router.push("/")
+    switch(id){
+      case admin:{
+        break;
+      }
+      case admin2:{
+        break;
+      }
+      case admin3:{
+        break;
+      }
+      default:{
+        router.push("/")
+        break;
+      }
+    }
+
   }, [id, router])
   
   return (
