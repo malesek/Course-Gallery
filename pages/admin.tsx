@@ -16,7 +16,7 @@ const Admin: NextPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if(id !== (admin || admin2 || admin3)) router.push("/")
+    if(id !== (admin3 || admin || admin2)) router.push("/")
   }, [id, router])
   
   return (
