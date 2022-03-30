@@ -55,7 +55,7 @@ const Map: React.FC = () => {
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
   });
 
-  if (!isLoaded) return <h1>Loading Map</h1>;
+  if (!isLoaded) return <h1>Loading Map...</h1>;
   
   return (
     <GoogleMap

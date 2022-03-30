@@ -61,6 +61,8 @@ const MenuButton = styled.div`
 `;
 
 const admin = "AxKCMrGftgM1uYueydTRgwqHmv83";
+const admin2 = "2bbacSDMZYSipFyzF9dafvn7lTH2";
+const admin3 = "VX9KU5amxJdKnFud5TPIdv9hjbg1";
 
 const TopBar: React.FC = () => {
 
@@ -73,22 +75,24 @@ const TopBar: React.FC = () => {
                 </CourseGallery>
             </Link>
             <Buttons>
-                <MenuButton>
-                    Kontakt
-                </MenuButton>
+                <Link href="https://www.facebook.com/marecek.pavlicek" passHref>
+                    <MenuButton>
+                        Kontakt
+                    </MenuButton>
+                </Link>
                 {!user ? (
                     <MenuButton onClick={login}>
                         Login
                     </MenuButton>
                 ) : (
                     <>
-                    {user.uid === admin &&
-                        <Link href="/admin" passHref>
-                            <MenuButton>
-                                Admin
-                            </MenuButton>
-                        </Link>
-                    }
+                        {(user.uid === admin || user.uid === admin2 || user.uid === admin3) &&
+                            <Link href="/admin" passHref>
+                                <MenuButton>
+                                    Admin
+                                </MenuButton>
+                            </Link>
+                        }
                         <AddPhotos />
                         <MenuButton onClick={logout}>
                             Logout
@@ -103,4 +107,4 @@ const TopBar: React.FC = () => {
 }
 
 export default TopBar;
-export {MenuButton};
+export { MenuButton };

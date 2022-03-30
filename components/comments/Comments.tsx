@@ -44,7 +44,8 @@ type Props = {
 }
 
 const admin1 = "AxKCMrGftgM1uYueydTRgwqHmv83";
-const admin2 = "2bbacSDMZYSipFyzF9dafvn7lTH2"
+const admin2 = "2bbacSDMZYSipFyzF9dafvn7lTH2";
+const admin3 = "VX9KU5amxJdKnFud5TPIdv9hjbg1";
 
 const Comments: React.FC<Props> = ({ courseId }) => {
 
@@ -72,7 +73,7 @@ const Comments: React.FC<Props> = ({ courseId }) => {
                     <Comm key={comment.comment}>
                         <h4>{comment.name}</h4>
                         <p>{comment.comment}</p>
-                        {user?.uid == admin1 || user?.uid == admin2 || (user?.uid == comment.uid && (now - createdAt) < oneDay) ?(
+                        {user?.uid == admin1 || user?.uid == admin2 || user?.uid == admin3 || (user?.uid == comment.uid && (now - createdAt) < oneDay) ?(
                             <Trash
                                 onClick={() => deleteComment(comment.id)}
                             />) : (<></>)

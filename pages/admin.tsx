@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 
 const admin = "AxKCMrGftgM1uYueydTRgwqHmv83";
 const admin2 = "2bbacSDMZYSipFyzF9dafvn7lTH2";
+const admin3 = "VX9KU5amxJdKnFud5TPIdv9hjbg1";
 
 const Admin: NextPage = () => {
 
@@ -15,19 +16,17 @@ const Admin: NextPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if(id !== (admin || admin2)) router.push("/")
+    if(id !== (admin || admin2 || admin3)) router.push("/")
   }, [id, router])
   
   return (
     <>
-    {id === admin ? (
+    {(id === admin || id === admin2 || id === admin3) &&
       <>
-      <TopBar/>
-      <ValidatePhoto key={id}/>
+        <TopBar/>
+        <ValidatePhoto key={id}/>
       </>
-    ):(
-      <></>
-    )}
+    }
     </>
   )
 }

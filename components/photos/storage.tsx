@@ -1,12 +1,10 @@
 import { ref, uploadBytesResumable, getDownloadURL } from "@firebase/storage";
 import { storage, db } from "../../firebase/firebase";
 import { addDoc, collection } from "@firebase/firestore";
-const metadata = {
-    contentType: 'image/*'
-  };
+
 const saveStorage = (file: any, folderName: string, photoDesc: string) => {
         const storageRef = ref(storage, file.name);
-        const uploadTask = uploadBytesResumable(storageRef, file, metadata);
+        const uploadTask = uploadBytesResumable(storageRef, file);
         uploadTask.on('state_changed',
             (snapshot) => {
                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
